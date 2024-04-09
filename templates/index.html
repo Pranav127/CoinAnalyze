@@ -1,0 +1,532 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!--section start-->
+    <div id="about">
+        <section class="section-gap section-gray-bg">
+            <div class="container-lg">
+                <!--section title-->
+                <div class="row text-center">
+                    <div class="col-12">
+                        <div class="section-title">
+                            <h2 class="my-3 mb-6 ">What is Coinalyzer?</h2>
+                            <p class="my-3 just fs-5" >
+                                Coinalyzer is a comprehensive online platform dedicated to the world of cryptocurrencies. Offering a 
+                                wide array of tools and resources, Coinalyzer features a real-time ranking of the top 100 cryptocurrencies 
+                                based on market capitalization. The platform also curates the latest news articles in the crypto space, 
+                                conducts sentiment analyses on various cryptocurrencies, and provides a live feed of pertinent tweets. 
+                                Additionally, Coinalyzer offers predictive analytics for crypto prices, a specialized Cryptocurrency 
+                                converter, and a trade signals dashboard. From seasoned investors to those just starting their c
+                                rypto journey, Coinalyzer serves as a one-stop information hub.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!--currency icons-->
+                <div class="row justify-content-md-center text-center accept-card">
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card ">
+                                    <div class="card-body py-md-4"><img src="static/assets/img/svg-icons/bitcoin.svg" width="70" alt="" class="flip-image" /></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card ">
+                                    <div class="card-body py-md-4"><img src="static/assets/img/svg-icons/dash.svg" width="70" alt="" class="flip-image" /></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card ">
+                                    <div class="card-body py-md-4"><img src="static/assets/img/svg-icons/Ethereum.svg" width="70" alt="" class="flip-image" /></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card ">
+                                    <div class="card-body py-md-4"><img src="static/assets/img/svg-icons/ripple.svg" width="70" alt="" class="flip-image" /></div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card ">
+                                    <div class="card-body py-md-4"><img src="static/assets/img/svg-icons/litecoin.svg" width="70" alt="" class="flip-image" /></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--currency icons-->
+                <div style="background-image: url('static/assets/img/banner-curve-dark.png'); transform: scaleY(-1);"></div>
+            </div>
+        </section>
+
+        <!--section start-->
+        <section class="section-gap " style = "background-color: #2a2a2a;">
+        
+            <div class="container-lg">
+                <!--section title-->
+                <div class="row text-center">
+                    <div class="col-12">
+                        <div class="section-title">
+                            <h2 class="">Overview</h2>
+                        </div>
+                    </div>
+                </div>
+                <!--section title end-->
+
+                <hr class = "border border-2 opacity-50 "style = "background-color: #e0e0e0;">
+
+                <!--section overview-->
+                <div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap">
+                        <h2 class="mb-md-5  text-blue-color">Cryptocurrencies</h2>
+                        <p class=" just fs-5">This page provides real-time data on the top 100
+                            cryptocurrencies by market capitalization. Users can quickly
+                            and easily access current prices and other important
+                            metrics, including market capitalization, trading volume,
+                            and price change over different time periods. This page is
+                            particularly useful for traders and investors who need to
+                            stay up to date with the latest market trends and
+                            performance metrics.</p>
+                        <a href="/price" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+                    </div>
+                    <div class="col-md-5 col-gap">
+                        <img class="my-2" src="static/assets/img/prices.png" alt="" />
+                    </div>
+                </div>
+
+                <div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap">
+                        <h2 class="text-paste-color mb-md-5 ">News</h2>
+                        <p class="just fs-5 ">This page provides users with the latest news and trends in
+                            the cryptocurrency industry. It aggregates news articles,
+                            blog posts, and other types of content from a variety of
+                            sources, providing users with a comprehensive overview of
+                            the industry. This page can help users stay informed about
+                            new projects, partnerships, and other important developments
+                            that may affect the price of cryptocurrencies.</p>
+                        <a href="/news" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+                    </div>
+                    <div class="col-md-5 col-gap mb-md-0 mb-3 order-md-first">
+                        <div class="">
+                            <img src="static/assets/img/news.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap">
+                        <h2 class="mb-md-5 text-blue-color ">Sentiments</h2>
+                        <p class=" just fs-5 "> This page provides users with insights into the broader
+                            market sentiment towards cryptocurrencies. It uses advanced
+                            machine learning algorithms to analyze social media posts,
+                            news articles, and other sources of data, providing an
+                            overall sentiment score for different cryptocurrencies or
+                            the industry as a whole. This page is particularly useful
+                            for traders and investors who need to understand the broader
+                            market sentiment in order to make informed investment
+                            decisions.</p>
+                        <a href="/sentiment" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+                    </div>
+                    <div class="col-md-5 col-gap ">
+                        <img class="my-5" src="static/assets/img/sentiment.png" alt="" />
+                    </div>
+                </div>
+
+                <div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap ">
+                        <h2 class="text-paste-color mb-md-5 ">Converter</h2>
+                        <p class="just fs-5 ">This page provides users with a tool for converting units of
+                            bitcoin and other cryptocurrencies into different currencies in the world. It uses
+                            current market rates to generate real-time conversion rates
+                            and provides users with an easy-to-use interface for quickly
+                            and accurately converting between currencies. This page is
+                            particularly useful for traders and investors who need to
+                            make quick currency conversions in order to execute trades.</p>
+                        <a href="/tweets" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+                    </div>
+                    <div class="col-md-5 col-gap mb-md-0 mb-3 order-md-first">
+                        <div class="">
+                            <img src="static/assets/img/converter.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap">
+                        <h2 class="mb-md-5 text-blue-color ">Price Forecast</h2>
+                        <p class=" just fs-5 ">This page provides users with insights into the future
+                            performance of cryptocurrencies. It uses machine learning
+                            algorithm and other techniques to predict the price of
+                            various cryptocurrencies for the next day. This page can
+                            help traders and investors make more informed investment
+                            decisions by providing them with accurate and up-to-date
+                            information about market trends and performance metrics.</p>
+                        <a href="/convert" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+
+                    </div>
+                    <div class="col-md-5 col-gap ">
+                        <img class="my-5" src="static/assets/img/price-forecast.png" alt="" />
+                    </div>
+                </div>
+
+                <!--<div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap ">
+                        <h2 class="text-paste-color mb-md-5 ">Price Forecast</h2>
+                        <p class="just fs-5 ">This page provides users with insights into the future
+                            performance of cryptocurrencies. It uses machine learning
+                            algorithm and other techniques to predict the price of
+                            various cryptocurrencies for the next day. This page can
+                            help traders and investors make more informed investment
+                            decisions by providing them with accurate and up-to-date
+                            information about market trends and performance metrics.</p>
+                        <a href="/predict" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+                    </div>
+                    <div class="col-md-5 col-gap mb-md-0 mb-3 order-md-first">
+                        <div class="">
+                            <img src="static/assets/img/price-forecast.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap">
+                        <h2 class="text-paste-color mb-md-5 ">Portfolio</h2>
+                        <p class="just fs-5 ">
+                            This page is designed to help users keep track of their cryptocurrency
+                            investments. Users can input details about their investments, including the
+                            amount invested, the cryptocurrency purchased, and the purchase date, and the
+                            page will calculate the current value of their portfolio based on the latest
+                            market prices. The page also provides chart to visualize the user's
+                            portfolio performance over time.
+                        </p>
+                        <a href="/portfolio" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+                    </div>
+                    <div class="col-md-5 col-gap ">
+                        <img class="my-5" src="static/assets/img/portfolio.png" alt="" />
+                    </div>
+                </div>-->
+
+                <div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap ">
+                        <h2 class="text-paste-color mb-md-5 ">Trade Signals</h2>
+                        <p class="just fs-5 ">This page is designed to help traders make informed decisions in the volatile 
+                            cryptocurrency market. The signal feature uses advanced algorithms and technical analysis to 
+                            identify potential buying and selling opportunities for Bitcoin, and generates real-time alerts 
+                            and notifications when these opportunities arise. Traders can customize their signal settings 
+                            and receive alerts via email, SMS, or other methods, so they can stay on top of market trends 
+                            and make timely trades. With the Bitcoin trade signal feature, traders can gain a competitive 
+                            edge and maximize their profits in the fast-paced world of cryptocurrency trading.</p>
+                        <a href="/tradesignal" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+                    </div>
+                    <div class="col-md-5 col-gap mb-md-0 mb-3 order-md-first">
+                        <div class="">
+                            <img src="static/assets/img/signals.png" alt="" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="row d-flex align-items-center ">
+                    <div class="col-md-7 col-gap">
+                        <h2 class="text-paste-color mb-md-5 ">About</h2>
+                        <p class=" fs-5 "> -->
+                            <!--About content-->
+                            <!--About content-->
+                            <!--About content-->
+                            <!--About content-->
+                            <!--About content-->
+                            
+                        <!-- </p>
+                        <a href="/portfolio" class="button button-blue button-pill text-uppercase ">Visit Page</a>
+                    </div>
+                    <div class="col-md-5 col-gap ">
+                        <img class="my-5" src="static/assets/img/portfolio.png" alt="" />
+                    </div>
+                </div> -->
+                <!--section overview end-->
+                
+            </div>
+        </section>
+    </div>
+    <!--section end-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--faq section start-->
+    <section class="section-gap pb-0 text-light">
+        <div class="container">
+            <!--section title-->
+            <div class="row text-center">
+                <div class="col-12">
+                    <div class="section-title">
+                        <h2>Frequently Asked Question</h2>
+                    </div>
+                </div>
+            </div>
+            <!--section title-->
+            <div class="row" id="accordion-1">
+                <div class="col-md-6 col-gap">
+                    <div class="faq" id="faq-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-1-1" aria-expanded="false">
+                                        What is Cryptocurrency?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-1-1" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>A cryptocurrency is a type of digital or virtual currency that uses cryptography for security. Unlike traditional currencies, it is decentralized and operates on a technology called blockchain, which is a public ledger containing all transaction data.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-1-2" aria-expanded="false">
+                                        How Does Blockchain Technology Work?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-1-2" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Blockchain is a distributed ledger technology that stores data across multiple systems in a secure, immutable, and transparent manner. Each "block" contains a list of transactions, and these blocks are linked together in chronological order to form a "chain."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-1-3" aria-expanded="false">
+                                        What is a Bitcoin?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-1-3" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Bitcoin is the first decentralized cryptocurrency, created by an unknown person or group of people under the pseudonym Satoshi Nakamoto in 2009. It operates on a peer-to-peer network and allows users to make transactions without a central authority or single administrator.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-1-4" aria-expanded="false">
+                                        How Do Cryptocurrency Markets Work?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-1-4" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Cryptocurrency markets operate 24/7, allowing trading between different cryptocurrencies and fiat currencies. These markets are facilitated by platforms known as cryptocurrency exchanges.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-1-5" aria-expanded="false">
+                                        How Do I Buy Cryptocurrency?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-1-5" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>You can buy cryptocurrency through various platforms known as cryptocurrency exchanges. You'll need to create an account, verify your identity, and then you can make transactions using various payment methods like bank transfer, credit card, or other cryptocurrencies.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-1-6" aria-expanded="false">
+                                        Is Cryptocurrency Secure?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-1-6" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>While the technology behind cryptocurrencies is generally secure, the ecosystem is prone to hacks, fraud, and scams. Always exercise caution, use secure wallets, enable two-factor authentication, and do your own research before making any transactions.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-1-7" aria-expanded="false">
+                                        How Do I Store My Cryptocurrency?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-1-7" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Cryptocurrencies can be stored in a digital wallet, which can be online, offline, or even hardware-based. Each wallet has a public address, which is like an account number, and a private key, which should be kept secret.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-1-8" aria-expanded="false">
+                                        What Are Altcoins?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-1-8" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Altcoins are any cryptocurrencies other than Bitcoin. Some popular altcoins include Ethereum, Ripple (XRP), and Litecoin. They each have unique features and use-cases, varying in everything from transaction speed to privacy.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-gap">
+                    <div class="faq" id="faq-2">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-2-1" aria-expanded="false">
+                                        What is Coinalyzer?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-2-1" class="collapse" data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Coinalyzer is a comprehensive platform that specializes in cryptocurrency analysis and prediction. We provide information on the top 100 cryptocurrencies, markets, exchanges, and much more to help investors make informed decisions.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-2-2" aria-expanded="false">
+                                        What Sets Coinalyzer Apart?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-2-2" class="collapse"  data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Our unique features like price prediction, sentiment analysis, trade signals, and portfolio management set us apart from other platforms. We offer a one-stop solution for all your cryptocurrency investment needs.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-2-3" aria-expanded="false">
+                                        How Accurate Are Your Price Predictions?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-2-3" class="collapse"  data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Our price predictions are generated through advanced algorithms and machine learning techniques. While we strive for accuracy, please note that all investments come with risks, and past performance is not indicative of future results.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-2-4" aria-expanded="false">
+                                        What is Sentiment Analysis?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-2-4" class="collapse"  data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Sentiment Analysis gauges the mood of the market by analyzing various data points, including news articles, social media posts, and market trends. It helps investors understand the overall sentiment before making investment decisions.                                </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-2-5" aria-expanded="false">
+                                        How Do I Use Trade Signals?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-2-5" class="collapse"  data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Trade signals are suggestions for buying or selling a cryptocurrency at a specific price and time. These signals are generated through technical analysis and should be used as a part of your overall investment strategy.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-2-6" aria-expanded="false">
+                                        What is the Portfolio Feature?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-2-6" class="collapse"  data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>The Portfolio feature allows you to track all your cryptocurrency investments in one place. You can add your holdings, monitor their performance, and manage your investment strategy effectively.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-2-7" aria-expanded="false">
+                                        How Do I Convert One Cryptocurrency to Another?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-2-7" class="collapse"  data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p>Our converter tool allows you to easily convert one cryptocurrency to another. Just enter the amount, select the currencies, and get real-time conversion rates.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>
+                                    <a class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-2-8" aria-expanded="false">
+                                        What Does Coinalyzer Aim to Provide Users?
+                                    </a>
+                                </h5>
+                            </div>
+                            <div id="collapse-2-8" class="collapse"  data-bs-parent="#accordion-1">
+                                <div class="card-body pt-0">
+                                    <p class="just" >Coinalyzer aims to be a comprehensive platform for cryptocurrency enthusiasts and investors. We strive to offer a one-stop solution for real-time data analysis, market trends, price predictions, and sentiment analysis. Our goal is to empower you with all the information you need to make informed decisions in the cryptocurrency market.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--faq section end-->
+
+
+
+
+{% endblock %} 

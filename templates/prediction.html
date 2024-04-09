@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+<!--======================================
+PREDICTION CSS STYLES
+=======================================-->
+{% block extra_styles %}
+<style>
+    body {
+        font-family: 'Montserrat';
+        background: linear-gradient(to right, #0f3c6c 0%, #357ABD 100%); /* Gradient background */
+    }
+
+    .bg-particles {
+        position: fixed;    /* Fixed positioning */
+        top: 0;
+        left: 0;
+        width: 100vw;       /* Viewport width */
+        height: 100vh;      /* Viewport height */
+        z-index: -1;        /* Place it behind the content */
+    }
+</style>
+{% endblock %}
+
+<!--======================================
+PREDICTION CONTENT
+=======================================-->
+{% block content %}
+
+<div class="container-lg container_gap"> <!--Start of Main Div-->
+
+	<!-- Particles -->   
+	<canvas class='bg-particles' id='bg-particles'></canvas>
+	<!-- End Particles -->
+	
+	<!-- Title --> 
+    <h1 class="text-center my-4">Cryptocurrency Price Prediction</h1>
+	<!-- End Title -->
+
+    <!-- Dark-themed form -->
+    <form action="/predict" method="post" class="mb-3">
+        <div class="row justify-content-end">
+            <div class="col-md-auto col-12">
+                <label for="coin" class="form-label text-white fw-bold">Select a Cryptocurrency:</label>
+                <select name="coin" id="coin" class="form-select form-control-dark bg-dark text-white border-0" style="width: 300px; max-width: 100%;">
+                    <option value="BTC">Bitcoin</option>
+                    <option value="ETH">Ethereum</option>
+                    <!-- Add more coins as needed -->
+                </select>
+            </div>
+            <div class="col-md-auto col-12">
+                <label for="model_type" class="form-label text-white fw-bold">Select a Model:</label>
+                <select name="model_type" id="model_type" class="form-select form-control-dark bg-dark text-white border-0" style="width: 300px; max-width: 100%;">
+                    <option value="RF">Random Forest</option>
+                    <option value="SARIMA">SARIMA</option>
+                </select>
+            </div>
+            <div class="col-md-auto col-12 d-flex align-items-end">
+                <button type="submit" class="btn btn-dark mt-3 mt-md-0 ">Predict</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Card for Plotly chart -->
+    <div class="card bg-dark text-white" style="height: 600px;">
+        <div class="card-body h-100">
+            <!-- Div to display the Plotly chart -->
+            <div id="chart" class="h-100"></div>
+        </div>
+    </div>
+
+    <div class="text-center my-2 mb-5">
+        <label class="text-white fw-bold">Chart Toggle: </label>
+        <button class="btn btn-dark btn-md" id="showAll">View All</button>
+        <button class="btn btn-dark btn-md" id="showPredicted">View Predicted Prices</button>
+    </div>
+
+    <script>
+        // Load the initial Plotly chart
+        var initialGraphJSON = {{ graphJSON|safe }};
+        
+        // Set the initial size of the chart based on its container
+        initialGraphJSON.layout.width = $('#chart').width();
+        initialGraphJSON.layout.height = $('#chart').height();
+
+        Plotly.newPlot('chart', initialGraphJSON.data, initialGraphJSON.layout);
+        
+        $('form').submit(function(e) {
+            e.preventDefault();
+            $.post('/predict', $(this).serialize(), function(data) {
+                // Update the Plotly chart with new data
+                var updatedGraphJSON = JSON.parse(data.graphJSON);
+                Plotly.react('chart', updatedGraphJSON.data, updatedGraphJSON.layout);
+            }, 'json');
+        });
+
+        // Event listener for the "All" button
+        $('#showAll').click(function() {
+            var update = { 'visible': [true, true, true, true] };
+            Plotly.restyle('chart', update);
+        });
+
+        // Event listener for the "Predicted only" button
+        $('#showPredicted').click(function() {
+            var update = { 'visible': [false, true, true, true] };
+            Plotly.restyle('chart', update);
+        });
+
+        // Adjust chart size when window resizes
+        $(window).resize(function() {
+            var update = {
+                width: $('#chart').width(),
+                height: $('#chart').height()
+            };
+            Plotly.relayout('chart', update);
+        });
+    </script>
+
+</div>
+
+<!--No Banner Code-->
+<script>
+    var banner = document.getElementById("banner");
+    banner.parentNode.removeChild(banner);
+</script>
+<!--End No Banner Code-->
+
+{% endblock %}

@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+<!--======================================
+TRADE SIGNAL CSS STYLES
+=======================================-->
+{% block extra_styles %}
+<style>
+    body {
+        font-family: 'Montserrat';
+        background: linear-gradient(to right, #0f3c6c 0%, #357ABD 100%); /* Gradient background */
+    }
+
+    .bg-particles {
+        position: fixed;    /* Fixed positioning */
+        top: 0;
+        left: 0;
+        width: 100vw;       /* Viewport width */
+        height: 100vh;      /* Viewport height */
+        z-index: -1;        /* Place it behind the content */
+    }
+
+    
+</style>
+{% endblock %}
+
+<!--======================================
+TRADE SIGNAL CONTENT
+=======================================-->
+{% block content %}
+
+<div class="container-lg container_gap"> <!--Start of Main Div-->
+
+	<!-- Particles -->   
+	<canvas class='bg-particles' id='bg-particles'></canvas>
+	<!-- End Particles -->
+	
+	<!-- Title --> 
+    <h1 class="text-center my-4 mb-5">Trade Signals</h1>
+
+    <div class="card bg-dark text-white">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Cryptocurrency Selection -->
+                    <div class="col-md d-flex flex-column mb-3">
+                        <label for="crypto-select" class="form-label">Cryptocurrency:</label>
+                        <select id="crypto-select" class="form-select form-select-sm bg-dark text-white flex-grow-1">
+                            <option value="BTC-USD">BTC-USD</option>
+                            <option value="ETH-USD">ETH-USD</option>
+                            <option value="LTC-USD">LTC-USD</option>
+                        </select>
+                    </div>
+                    <!-- Short Window Input -->
+                    <div class="col-md d-flex flex-column mb-3">
+                        <label for="short-window" class="form-label">Short Window:</label>
+                        <input type="number" id="short-window" value="5" class="form-control form-control-sm bg-dark text-white flex-grow-1">
+                    </div>
+                    <!-- Long Window Input -->
+                    <div class="col-md d-flex flex-column mb-3">
+                        <label for="long-window" class="form-label">Long Window:</label>
+                        <input type="number" id="long-window" value="20" class="form-control form-control-sm bg-dark text-white flex-grow-1">
+                    </div>
+                    <!-- Get Signal Button -->
+                    <div class="col-md d-flex align-items-end mb-3">
+                        <button class="btn btn-secondary w-100" onclick="getTradeSignal()">Get Signal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="d-flex justify-content-center mt-3">
+                <div class="spinner-border text-primary" role="status" id="loading-spinner">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+            <div id="error-message" class="alert alert-danger d-none mt-3" role="alert">
+                An error occurred while fetching data. Please try again later.
+            </div>
+
+            <div id="trade-signal-content" style="display: none;">
+                <h5 class="mb-3">Trade Signal Status:</h5>
+            
+                <h6 class="mb-2 font-weight-bold">Short Window Analysis:</h6>
+                <p id="short-analysis" class="ml-3">Based on the recent price movements and technical indicators for the last X trading days, the recommended action is ...</p>
+                
+                <h6 class="mb-2 mt-3 font-weight-bold">Long Window Analysis:</h6>
+                <p id="long-analysis" class="ml-3">Considering a broader perspective over the last Y trading days, the recommended action is ...</p>
+                
+                <hr>
+                
+                <h6 class="mb-2 font-weight-bold">News Sentiment Analysis:</h6>
+                <p id="sentiment-analysis" class="ml-3">Fetching recent news sentiment...</p>
+                
+                <hr>
+                
+                <p class="text-white small">Please make sure to consult with a financial advisor and consider your own risk appetite before making any trading decisions.</p>
+            </div>
+        </div>         
+    </div>
+
+        
+    <div class="card mt-4 bg-dark text-white">
+        <div class="card-header">
+            Historical Data
+        </div>
+        <div class="card-body d-flex justify-content-center align-items-center" style="height: 600px;">
+            <div id="historical-data-chart" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+            
+    <div class="card mt-4 bg-dark text-white">
+        <div class="card-header">
+            RSI (Relative Strength Index)
+        </div>
+        <div class="card-body d-flex justify-content-center align-items-center" style="height: 600px;">
+            <div id="rsi-chart" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+    
+    <!-- Making the table responsive -->
+    <div>
+        <table class="table table-responsive table-dark table-bordered table-striped" id="historical-data-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Open</th>
+                    <th>High</th>
+                    <th>Low</th>
+                    <th>Close</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be populated from JavaScript -->
+            </tbody>
+        </table>
+        <!-- Pagination placeholder -->
+        <nav aria-label="Table pagination">
+            <ul class="pagination bg-dark justify-content-center"></ul>
+        </nav>
+    </div>
+        
+        
+
+    <script>
+        function getTradeSignal() {
+            const requestData = {
+                symbol: $('#crypto-select').val(),
+                short_window: $('#short-window').val(),
+                long_window: $('#long-window').val()
+            };
+
+            // Show the spinner and hide the trade signal content
+            $('#loading-spinner').show();
+            $('#trade-signal-content').hide();
+            
+            // In the success callback of the AJAX request, show the trade signal content
+            $.post('/get_signal', requestData, function (response) {
+                document.getElementById('short-analysis').textContent = response.shortAnalysis;
+                document.getElementById('long-analysis').textContent = response.longAnalysis;
+                document.getElementById('sentiment-analysis').textContent = response.sentimentAnalysis;
+                $('#loading-spinner').hide();
+                $('#trade-signal-content').show();
+            }).fail(function (xhr, status, error) {
+                console.error('Error fetching trade signal:', error);
+                $('#error-message').removeClass('d-none');
+                $('#loading-spinner').hide();
+            });
+
+            // Fetch the chart data
+            $.post('/get_chart', requestData, function (response) {
+                console.log("Received data:", response);
+                
+                response.main.layout.height = null; // Or you can omit this line altogether
+                response.rsi.layout.height = null;  // Or you can omit this line altogether
+
+                Plotly.newPlot('historical-data-chart', response.main.data, response.main.layout);
+                Plotly.newPlot('rsi-chart', response.rsi.data, response.rsi.layout);
+                $('#trade-signal-content').show();
+            }).fail(function (xhr, status, error) {
+                console.error('Error fetching historical data:', error);
+                $('#error-message').removeClass('d-none');
+            });
+            
+            getHistoricalData();
+        }
+
+        // Attach a window resize event to update the chart size
+        $(window).resize(function() {
+            Plotly.Plots.resize(document.getElementById('historical-data-chart'));
+            Plotly.Plots.resize(document.getElementById('rsi-chart'));
+        });
+
+        let currentPage = 1;
+        let totalPages = 1;
+
+        function getHistoricalData() {
+            const requestData = {
+                symbol: $('#crypto-select').val(),
+                page: currentPage
+            };
+            
+            $.post('/get_data', requestData, function (response) {
+                console.log("Received data:", response);  // Log the received data for inspection
+                
+                // Update the table with the received data
+                let tableContent = "";
+                for (let i = 0; i < response.data.length; i++) {
+                    tableContent += `<tr>`;
+                    tableContent += `<td>${response.data[i].date}</td>`;
+                    tableContent += `<td>${response.data[i].open}</td>`;
+                    tableContent += `<td>${response.data[i].high}</td>`;
+                    tableContent += `<td>${response.data[i].low}</td>`;
+                    tableContent += `<td>${response.data[i].close}</td>`;
+                    tableContent += `</tr>`;
+                }
+                $('#historical-data-table tbody').html(tableContent);
+        
+                // Update pagination
+                totalPages = response.total_pages;
+                updatePagination();
+        
+            }).fail(function (xhr, status, error) {
+                console.error('Error fetching historical data:', error);
+            });
+        }
+        
+        function updatePagination() {
+            let paginationContent = '<li class="page-item' + (currentPage == 1 ? ' disabled' : '') + '"><a class="page-link text-white" href="#" onclick="changePage(currentPage-1)">Previous</a></li>';
+            for (let i = 1; i <= totalPages; i++) {
+                paginationContent += '<li class="page-item' + (i == currentPage ? ' active' : '') + '"><a class="page-link text-white" href="#" onclick="changePage(' + i + ')">' + i + '</a></li>';
+            }
+            paginationContent += '<li class="page-item' + (currentPage == totalPages ? ' disabled' : '') + '"><a class="page-link text-white" href="#" onclick="changePage(currentPage+1)">Next</a></li>';
+            
+            $('.pagination').html(paginationContent);
+        }
+        
+
+        function changePage(page) {
+            currentPage = page;
+            getHistoricalData();
+        }
+
+        $(document).ready(function () {
+            getTradeSignal();
+        });
+    </script>
+</div>
+
+<!--No Banner Code-->
+<script>
+    var banner = document.getElementById("banner");
+    banner.parentNode.removeChild(banner);
+</script>
+<!--End No Banner Code-->
+
+{% endblock %}

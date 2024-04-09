@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Coinalyzer</title>
+
+    <!-- Insert your favicon link here -->
+    <link rel="icon" href="/static/assets/img/favicon.png" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <!-- Font Awesome CSS -->
+    <!-- Note: You had two versions of Font Awesome. It's generally best to stick with one to avoid conflicts. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link href="static/assets/css/main.css" rel="stylesheet">
+    <link href="static/assets/css/responsive.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- Flag Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+
+    <!-- Extra Styles (Django Template Tag) -->
+    {% block extra_styles %}{% endblock %}
+
+    <!-- kunal's Css -->
+    <link rel="stylesheet" href="/static/assets/css/kk.css">
+
+</head>
+
+<body class="dark-theme">
+
+    <!--header start-->
+    <header class="header navbar-blue">
+        <div>
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar navbar-expand-md" id="mainNav">
+                        <!--logo-->
+                        <a class="navbar-brand mr-5" href="/">
+                            <img src="static/assets/img/logo-2.png" srcset="static/assets/img/logo-2.png 16x" alt="" />
+                        </a>
+                        <!--logo-->
+
+                        <!--responsive toggle icon-->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarsExampleDefault">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <!--responsive toggle icon-->
+
+                        <!--nav link-->
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger" href="/">Home</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link js-scroll-trigger" href="#" id="navbarDropdownMarket"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Market <i class="fas fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-animate" aria-labelledby="navbarDropdownMarket">
+                                        <li><a class="dropdown-item" href="/price">Price</a></li>
+                                        <li><a class="dropdown-item" href="/news">News</a></li>
+                                        <li><a class="dropdown-item" href="/sentiment">Sentiments</a></li>
+                                        <li><a class="dropdown-item" href="/convert">Converter</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link js-scroll-trigger" href="#" id="navbarDropdownForecast"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Forecast <i class="fas fa-chevron-down"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-animate" aria-labelledby="navbarDropdownForecast">
+                                        <li><a class="dropdown-item" href="/predict">Crypto Price Forecast</a></li>
+                                        <li><a class="dropdown-item" href="/tradesignal">Trade Signal Forecast</a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger" href="/about">About Us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link js-scroll-trigger" href="/login">Sign In/Register</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--nav link-->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--header end-->
+
+
+    <!--banner start-->
+    <div class="banner-section gradient-banner" id="banner">
+        <div class="bubble-set">
+            <div class="bubble-lg"></div>
+            <div class="bubble-md"></div>
+            <div class="bubble-sm"></div>
+        </div>
+
+        <!-- Particles -->
+        <canvas class='bg-particles' id='bg-particles'></canvas>
+        <!-- End Particles -->
+
+        <div class="hero-text">
+            <div class="container-lg"> <!-- Using container-sm for smaller width -->
+                <div class="row">
+                    <div class="col-lg-7 col-md-12">
+                        <h1 class="hero-title text-light">Coinalyzer</h1>
+                        <p class="here-sub-title text-bold">
+                            Navigate the Intricacies of the Crypto World with Coinalyzer – Your Comprehensive Resource
+                            for In-Depth Cryptocurrency Trends, Analysis, and Intelligence
+                        </p>
+
+                        <div>
+                            <a href="https://www.youtube.com/watch?v=uau6_T7d3Os"
+                                class="button button-gray button-pill text-uppercase">Watch Video
+                                <i class="fa-solid fa-circle-play mx-2"></i></a> <!--Watch Now, YouTube Video Button-->
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12">
+                        <img class="banner-img" src="static/assets/img/Landing_Page.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-footer" style="background-image: url('static/assets/img/banner-curve-dark.png')"></div>
+    </div>
+    <!--banner end-->
+
+
+    <!--code for connection other html files-->
+    <!--main block-->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!--scroll up button start-->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">
+        <i class="fa-solid fa-angle-up fa-flip"></i>
+    </button>
+    <!--scroll up button end-->
+
+    <!--footer start-->
+
+    <footer class="footer-section">
+        <div class="container">
+            <!-- <div class="footer-cta pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="cta-text">
+                                <h4>Find us</h4>
+                                <span>1010 Avenue, sw 54321, chandigarh</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-phone"></i>
+                            <div class="cta-text">
+                                <h4>Call us</h4>
+                                <span>9876543210 0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="far fa-envelope-open"></i>
+                            <div class="cta-text">
+                                <h4>Mail us</h4>
+                                <span>mail@info.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-logo">
+                                <a href="index.html"><img src="/static/assets/img/Logo 2.png"
+                                        srcset="/static/assets/img/favicon2.png 16x" class="img-fluid bg"
+                                        alt="logo"></a>
+                            </div>
+                            <div class="footer-text">
+                                <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor
+                                    incididuntut consec tetur adipisicing
+                                    elit,Lorem ipsum dolor sit amet.</p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span>Follow us</span>
+                                <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                                <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Useful Links</h3>
+                            </div>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">about</a></li>
+                                <li><a href="#">services</a></li>
+                                <li><a href="#">portfolio</a></li>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Our Services</a></li>
+                                <li><a href="#">Expert Team</a></li>
+                                <li><a href="#">Contact us</a></li>
+                                <li><a href="#">Latest News</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Subscribe</h3>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                            </div>
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input type="text" placeholder="Email Address">
+                                    <button><i class="fa-solid fa-check"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                            <p>Copyright &copy; 2024, All Right Reserved <a href="#">Kunal</a></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">Terms</a></li>
+                                <li><a href="#">Privacy</a></li>
+                                <li><a href="#">Policy</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <footer class="footer py-4">
+        <div class="container-lg">
+            <div class="row">
+                <div class="col-md-4 col-sm-12">
+                    <h4 class="text-bold mb-4">About Coinalyzer</h4>
+                    <p class="text-light">
+                        Coinalyzer is your trusted source for real-time cryptocurrency data, market trends, and news
+                        updates. We aim to be the comprehensive resource for both beginners and experts in the crypto
+                        world. With a wide range of features such as price tracking, market analysis, and sentiment
+                        insights, Coinalyzer is dedicated to empowering you to make informed decisions in the dynamic
+                        world of cryptocurrency.
+                    </p>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <h4 class="text-bold mb-4">Links</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/price">Price</a></li>
+                        <li><a href="/news">News</a></li>
+                        <li><a href="/sentiment">Sentiments</a></li>
+                        <li><a href="/convert">Converter</a></li>
+                        <li><a href="/predict">Price Forecast</a></li>
+                        <li><a href="/tradesignal">Trade Signals</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 col-sm-12">
+                    <h4 class="text-bold mb-4">Contact Us</h4>
+                    <p class="text-light mb-0">You can contact us through our social media accounts:</p>
+                    <div class="mt-2">
+                        <a href="https://www.linkedin.com/" target="_blank"><i
+                                class="fab fa-linkedin fa-2x me-3"></i></a>
+                        <a href="https://www.instagram.com/" target="_blank"><i
+                                class="fab fa-instagram fa-2x me-3"></i></a>
+                        <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter fa-2x me-3"></i></a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-white mb-0 small">
+                Disclaimer: The information on Coinalyzer is for general informational purposes. We don't offer
+                investment advice or predictions. Trading decisions are your responsibility. We bear no liability for
+                trading losses. This site may contain ads for which we may receive compensation. For more details,
+                please read our disclaimer and privacy policy.
+            </p>
+            <hr class="border border-1 opacity-50 " style="background-color: #e0e0e0;">
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p class="text-white mb-0">
+                        Coinalyzer &copy; 2023. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+
+    <!--footer end-->
+
+
+
+    <script>
+        // Sticky Navbar 
+        window.onscroll = function () {
+            stickyFunction();
+            scrollFunction();
+        };
+
+        var header = document.querySelector('.header');
+        var sticky = header.offsetTop;
+
+        function stickyFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("navbar-sticky");
+            } else {
+                header.classList.remove("navbar-sticky");
+            }
+        }
+
+        // Scroll to top
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
+
+    <!-- Essential scripts for the website -->
+    <!-- Bootstrap 5 and its dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Bootstrap 5 main JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+
+    <!-- Libraries for animations, carousels, and other effects -->
+    <!-- jQuery Easing (Smooth scrolling effect for navigation) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for the website -->
+    <!-- Particles.js (Library to create particles animations) -->
+    <script src="static/assets/js/particles.js"></script>
+</body>
+
+</html>

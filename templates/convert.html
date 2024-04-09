@@ -1,0 +1,261 @@
+{% extends 'base.html' %}
+
+<!--======================================
+CONVERTER CSS STYLES
+=======================================-->
+{% block extra_styles %}
+<style>
+    body {
+        font-family: 'Montserrat';
+        background: linear-gradient(to right, #0f3c6c 0%, #357ABD 100%); /* Gradient background */
+    }
+
+    .bg-particles {
+        position: fixed;    /* Fixed positioning */
+        top: 0;
+        left: 0;
+        width: 100vw;       /* Viewport width */
+        height: 100vh;      /* Viewport height */
+        z-index: -1;        /* Place it behind the content */
+    }
+</style>
+{% endblock %}
+
+<!--======================================
+CONVERTER CONTENT
+=======================================-->
+{% block content %}
+
+<div class="container-lg container_gap"> <!--Start of Main Div-->
+
+	<!-- Particles -->   
+	<canvas class='bg-particles' id='bg-particles'></canvas>
+	<!-- End Particles -->
+	
+	<!-- Title --> 
+    <h1 class="text-center my-4 mb-5">Cryptocurrency Converter</h1>
+	<!-- End Title -->
+
+	<script>
+        $(document).ready(function() {
+    
+            function debounce(func, delay) {
+                let debounceTimer;
+                return function() {
+                    const context = this;
+                    const args = arguments;
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => func.apply(context, args), delay);
+                }
+            }
+    
+            $('#amount, #cryptocurrency, #currency, #direction, #precision').on('input', debounce(updateConversionResult, 500));
+
+    
+            function updateConversionResult() {
+                var amount = $('#amount').val();
+                var fromCurrency = $('#cryptocurrency').val();
+                var toCurrency = $('#currency').val();
+                var precision = $('#precision').val();
+                var direction = $('#direction').val();
+    
+                if (amount === "" || isNaN(amount)) {
+                    $('#conversionText').text("Please enter a valid amount.");
+                    return;
+                }
+
+                function formatCurrency(value, currency) {
+                    var formattedValue = parseFloat(value).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 8
+                    });
+        
+                    switch (currency) {
+                        case 'USD':
+                            return '$' + formattedValue;
+                        case 'EUR':
+                            return '€' + formattedValue;
+                        case 'JPY':
+                            return '¥' + formattedValue;
+                        case 'GBP':
+                            return '£' + formattedValue;
+                        case 'CNY':
+                            return '¥' + formattedValue;
+                        case 'AUD':
+                            return '$' + formattedValue;
+                        case 'CAD':
+                            return '$' + formattedValue;
+                        case 'CHF':
+                            return 'Fr' + formattedValue;
+                        case 'HKD':
+                            return '$' + formattedValue;
+                        case 'SGD':
+                            return '$' + formattedValue;
+                        case 'SEK':
+                            return 'kr' + formattedValue;
+                        case 'KRW':
+                            return '₩' + formattedValue;
+                        case 'NOK':
+                            return 'kr' + formattedValue;
+                        case 'MXN':
+                            return '$' + formattedValue;
+                        case 'NZD':
+                            return '$' + formattedValue;
+                        case 'INR':
+                            return '₹' + formattedValue;
+                        case 'RUB':
+                            return '₽' + formattedValue;
+                        case 'TRY':
+                            return '₺' + formattedValue;
+                        case 'ZAR':
+                            return 'R' + formattedValue;
+                        case 'BRL':
+                            return 'R$' + formattedValue;
+                        case 'TWD':
+                            return 'NT$' + formattedValue;
+                        case 'PLN':
+                            return 'zł' + formattedValue;
+                        case 'THB':
+                            return '฿' + formattedValue;
+                        case 'IDR':
+                            return 'Rp' + formattedValue;
+                        case 'HUF':
+                            return 'Ft' + formattedValue;
+                        case 'CZK':
+                            return 'Kč' + formattedValue;
+                        case 'DKK':
+                            return 'kr' + formattedValue;
+                        case 'ILS':
+                            return '₪' + formattedValue;
+                        case 'CLP':
+                            return '$' + formattedValue;
+                        case 'PHP':
+                            return '₱' + formattedValue;
+                        case 'AED':
+                            return 'د.إ' + formattedValue;
+                        case 'COP':
+                            return '$' + formattedValue;
+                        case 'SAR':
+                            return 'ر.س' + formattedValue;
+                        case 'ARS':
+                            return '$' + formattedValue;
+                        case 'EGP':
+                            return '£' + formattedValue;
+                        case 'MYR':
+                            return 'RM' + formattedValue;
+                        case 'NGN':
+                            return '₦' + formattedValue;
+                        case 'QAR':
+                            return 'ر.ق' + formattedValue;
+                        case 'PEN':
+                            return 'S/' + formattedValue;
+                        case 'UAH':
+                            return '₴' + formattedValue;
+                        case 'KWD':
+                            return 'د.ك' + formattedValue;
+                        case 'OMR':
+                            return '﷼' + formattedValue;
+                        case 'BDT':
+                            return '৳' + formattedValue;
+                        case 'LKR':
+                            return 'Rs' + formattedValue;
+                        case 'VND':
+                            return '₫' + formattedValue;
+                        case 'UGX':
+                            return 'USh' + formattedValue;
+                        case 'RON':
+                            return 'lei' + formattedValue;
+                        case 'TND':
+                            return 'د.ت' + formattedValue;
+                        case 'DZD':
+                            return 'د.ج' + formattedValue;
+                        case 'MAD':
+                            return 'د.م.' + formattedValue;
+                        case 'KES':
+                            return 'KSh' + formattedValue;
+                        case 'GHS':
+                            return '₵' + formattedValue;
+                        // Add more cases for other currencies as needed
+                        default:
+                            return formattedValue;
+                    }
+                }          
+    
+                $.ajax({
+                    url: '/get_conversion',
+                    type: 'GET',
+                    data: { amount: amount, from_currency: fromCurrency, to_currency: toCurrency, precision: precision, direction: direction },
+                    success: function(data) {
+                        var formattedResult = formatCurrency(data.result, toCurrency);
+                        $('#conversionText').text(formattedResult);
+                    },                    
+                    error: function() {
+                        $('#conversionText').text("Error fetching data.");
+                    }
+                });
+            }
+        });
+    </script>
+
+	<div class="card mt-4 bg-dark text-white">
+		<div class="card-body">
+			<div class="row align-items-center">
+				<!-- Left Column: Form -->
+				<div class="col border-end">
+					<form>
+						<div class="input-field mb-3">
+                            <label for="cryptocurrency">Select Cryptocurrency:</label>
+                            <select id="cryptocurrency" class="form-select form-control-dark bg-dark text-white">
+                                {% for symbol, name in crypto_symbols.items() %}
+                                    <option value="{{ symbol }}">{{ name }} ({{ symbol }})</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+						<div class="input-field mb-3">
+							<label for="amount">Enter Amount:</label>
+							<input type="text" id="amount" class="form-control form-control-dark bg-dark text-white" autocomplete="off">
+						</div>
+						<div class="input-field mb-3">
+                            <label for="currency">Select Currency:</label>
+                            <select id="currency" class="form-select form-control-dark bg-dark text-white">
+                                {% for currency in world_currencies %}
+                                    <option value="{{ currency.split(' - ')[1] }}">{{ currency }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+						<div class="input-field mb-3">
+							<label for="direction">Conversion Direction:</label>
+							<select id="direction" class="form-select form-control-dark bg-dark text-white">
+								<option value="crypto_to_fiat">Cryptocurrency to Fiat</option>
+								<option value="fiat_to_crypto">Fiat to Cryptocurrency</option>
+							</select>
+							<small class="form-text text-white">
+								"Cryptocurrency to Fiat" means converting from a cryptocurrency (like Bitcoin) to a traditional currency (like USD).<br>
+								"Fiat to Cryptocurrency" means converting from a traditional currency to a cryptocurrency.
+							</small>
+						</div>
+						<div class="input-field mb-3">
+							<label for="precision">Decimal Precision:</label>
+							<input type="number" id="precision" class="form-control form-control-dark bg-dark text-white" value="2" min="0" max="8">
+						</div>
+					</form>
+				</div>
+				
+				<!-- Right Column: Conversion Result -->
+				<div class="col">
+					<h5 class="text-bold text-center fs-2">Conversion Result:</h5>
+					<p class="text-center fs-5" id="conversionText">Enter values to see the result.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--No Banner Code-->
+<script>
+    var banner = document.getElementById("banner");
+    banner.parentNode.removeChild(banner);
+</script>
+<!--End No Banner Code-->
+
+{% endblock %}

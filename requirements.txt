@@ -1,0 +1,14 @@
+tweepy
+requests
+textblob
+pandas
+numpy
+scikit-learn
+ta
+plotly
+markupsafe
+yfinance
+statsmodels
+python-dotenv
+flask
+flask-caching

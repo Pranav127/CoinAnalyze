@@ -1,0 +1,289 @@
+
+
+      <heading>
+        <div class="container mt-5">
+          <div class="text-center">
+            <h1 class="header-text">
+              <div class="crypto-logo"></div>
+              Portfolio
+            </h1>
+          </div>
+        </div>
+      </heading>
+
+
+      <style>
+        .form-container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .input-field {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 10px;
+        }
+        
+        .input-field label {
+          margin-bottom: 5px;
+        }
+        
+        .input-field input[type="text"],
+        .input-field .form-select,
+        .input-field input[type="number"] {
+          width: 300px;
+          height: 32px;
+          border: 2px solid rgb(93, 158, 217);
+          border-radius: 4px;
+          padding: 0 10px;
+          background-color: #333;
+          color: #fff;
+        }
+        
+        .submit-button input[type="submit"] {
+          width: 150px;
+          height: 40px;
+          background-color: rgb(93, 158, 217);
+          color: #fff;
+          border: 2px solid rgb(93, 158, 217);
+          border-radius: 4px;
+          font-size: 16px;
+          cursor: pointer;
+          align-self: center; /* Added */
+        }
+        
+        .submit-button input[type="submit"]:hover {
+          background-color: rgb(93, 158, 217);
+          cursor: pointer;
+          color: black;
+        }
+      </style>
+      
+      <div class="container mt-5">
+        <form method="post" action="/portfolio" class="form-container">
+          {{ form.hidden_tag() }}
+          <div class="input-field">
+            <label for="{{ form.asset_id.id }}">Asset:</label>
+            {{ form.asset_id(class_="input-text") }}
+          </div>
+          <div class="input-field">
+            <label for="{{ form.quantity.id }}">Quantity:</label>
+            {{ form.quantity(class_="input-number") }}
+          </div>
+          <div class="input-field">
+            <label for="{{ form.purchase_price.id }}">Purchase Price:</label>
+            {{ form.purchase_price(class_="input-number") }}
+          </div>
+          <div class="submit-button">
+            <input type="submit" value="Add Asset">
+          </div>
+        </form>
+      </div>
+
+    <style>
+      /* TABLE */
+    .table thead {
+      background-color: rgb(69, 69, 69);
+      color: white;
+    }
+
+    .table tbody tr {
+      background-color: rgb(48, 48, 48);
+      height: 60px; /* Change this to the desired height */
+    }
+
+    .table tbody tr:hover {
+      background-color: rgb(27, 27, 27);
+      cursor: pointer;
+    }
+
+    .table tbody tr:hover .coin-info {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      z-index: 1;
+    }
+
+    .container {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .table td {
+      vertical-align: middle;
+    }
+  </style>
+
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Icons</th>
+                    <th>Asset</th>
+                    <th>Quantity</th>
+                    <th>Purchase Price</th>
+                    <th>Current Price</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in portfolio_data %}
+                <tr>
+                <td class="icon-cell" data-asset="{{ item.asset }}"></td>
+                <td>{{ item.asset }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.purchase_price }}</td>
+                    <td>{{ item.current_price if item.current_price is not none else 'N/A' }}</td>
+                    <td>{{ item.value if item.value is not none else 'N/A' }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+      /* Change the font size of the tweet text */
+      .card-text {
+        font-size: larger;
+        text-align: center;
+      }
+
+      /* Add a hover effect to the cards */
+      .card:hover {
+        box-shadow: 0 0 10px gray;
+      }
+
+      /* Change the background color and add a border to the cards */
+      .card {
+        /*background-color: #333333;*/
+        border: 2px solid rgb(93, 158, 217);
+        text-align: center;
+      }
+    </style>
+
+    <div class="container mt-3">
+        <div id="plot"></div>
+        <div class="container mt-3">
+          <div class="col-md-6 offset-md-3">
+            <div class="card">
+              <div class="card-body">
+                <h5>Total Portfolio value in U.S. Dollar (USD): ${{ total_value }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="container mt-3 d-flex justify-content-center">
+      <div class="alert alert-dismissible alert-info py-3 px-4" style="background-color: rgb(93, 158, 217)">
+        <a href="{{ url_for('download') }}" download class="alert-link">Download Portfolio as JSON file</a>
+      </div>
+    </div>
+    
+    <div style="width: 50%; margin: 35px auto;">
+        <canvas id="pie-chart"></canvas>
+    </div>
+   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      async function fetchIconUrl(asset) {
+        const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${asset.toLowerCase()}&order=market_cap_desc&per_page=100&page=1&sparkline=false`);
+        const data = await response.json();
+        if (data.length > 0) {
+            return data[0].image;
+        }
+        return null;
+    }
+
+    async function insertIcons() {
+        const iconCells = document.querySelectorAll('.icon-cell');
+        for (const iconCell of iconCells) {
+            const asset = iconCell.dataset.asset;
+            const iconUrl = await fetchIconUrl(asset);
+            if (iconUrl) {
+                const imgElement = document.createElement('img');
+                imgElement.src = iconUrl;
+                imgElement.width = 32;
+                imgElement.height = 32;
+                iconCell.appendChild(imgElement);
+            }
+        }
+    }
+
+    insertIcons();
+        async function addIconToTable(asset) {
+            const iconUrl = await getCoinIcon(asset);
+            const assetCells = document.querySelectorAll('tbody tr td:first-child');
+
+            assetCells.forEach(cell => {
+                if (cell.textContent === asset) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = iconUrl;
+                    imgElement.alt = `${asset} icon`;
+                    imgElement.width = 24;
+                    imgElement.height = 24;
+                    imgElement.style.marginRight = '10px';
+                    cell.prepend(imgElement);
+                }
+            });
+        }
+          
+       // Get the portfolio data from the HTML table
+        const portfolioTable = document.querySelector('table');
+        const portfolioRows = portfolioTable.querySelectorAll('tbody tr');
+        const portfolioData = [];
+        portfolioRows.forEach(row => {
+            const rowData = {};
+            rowData.asset = row.querySelector('td:nth-child(1)').textContent;
+            rowData.quantity = parseFloat(row.querySelector('td:nth-child(2)').textContent);
+            rowData.purchasePrice = parseFloat(row.querySelector('td:nth-child(3)').textContent);
+            rowData.currentPrice = parseFloat(row.querySelector('td:nth-child(4)').textContent);
+            rowData.value = parseFloat(row.querySelector('td:nth-child(5)').textContent);
+            portfolioData.push(rowData);
+        });
+        const pieChart = new Chart(document.getElementById('pie-chart'), {
+            type: 'pie',
+            data: {
+                labels: portfolioData.map(asset => asset.asset),
+                datasets: [{
+                    data: portfolioData.map(asset => asset.value),
+                    backgroundColor: [
+                        '#ff6384',
+                        '#36a2eb',
+                        '#cc65fe',
+                        '#ffce56',
+                        '#33ffcc',
+                        '#cc99ff',
+                        '#99ffcc'
+                    ]
+                }]
+            },
+            options: {
+                legend: {
+                    position: 'right',
+                    labels: {
+                        fontColor: '#fff',
+                        fontSize: 16,
+                        padding: 20
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Portfolio Allocation by Asset',
+                    fontColor: '#fff',
+                    fontSize: 24
+                }
+            }
+        });
+      </script>
+       
+    

@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+<!--======================================
+SENTIMENTS CSS STYLES
+=======================================-->
+{% block extra_styles %}
+<style>
+    body {
+        font-family: 'Montserrat';
+        background: linear-gradient(to right, #0f3c6c 0%, #357ABD 100%); /* Gradient background */
+    }
+
+    .bg-particles {
+        position: fixed;    /* Fixed positioning */
+        top: 0;
+        left: 0;
+        width: 100vw;       /* Viewport width */
+        height: 100vh;      /* Viewport height */
+        z-index: -1;        /* Place it behind the content */
+    }
+</style>
+{% endblock %}
+
+<!--======================================
+SENTIMENTS CONTENT
+=======================================-->
+{% block content %}
+
+<div class="container-lg container_gap"> <!--Start of Main Div-->
+	
+	<!-- Particles -->   
+	<canvas class='bg-particles' id='bg-particles'></canvas>
+	<!-- End Particles -->
+
+	<!-- Title --> 
+    <h1 class="text-center my-4 mb-5">Sentiment Analysis</h1>
+	<!-- End Title -->
+
+	<!-- Sentiment-->
+	<script>
+		async function fetchSentimentData(coin) {
+			const response = await fetch(`/${coin}?_=${new Date().getTime()}`, {
+				headers: {
+				'X-Requested-With': 'XMLHttpRequest'
+				}
+			});
+		
+            const data = await response.json();
+		    // Update Plotly chart
+            Plotly.newPlot('plotlyChartDiv', data.plotly_chart_data, data.plotly_chart_layout, {responsive: true});
+    
+            const updateArticlesList = (listId, articles) => {
+			const listElement = document.getElementById(listId);
+			listElement.innerHTML = "";
+                articles.forEach(article => {
+                    const listItem = document.createElement("li");
+                    listItem.classList.add("list-group-item", "bg-dark", "text-white");
+
+                    const articleTitle = document.createElement("span");
+                    articleTitle.innerText = article.title;
+                    listItem.appendChild(articleTitle);
+
+                    const readMoreLink = document.createElement("a");
+                    readMoreLink.href = article.url;
+                    readMoreLink.target = "_blank";
+                    readMoreLink.innerText = "Read more";
+                    readMoreLink.classList.add("float-end");
+                    listItem.appendChild(readMoreLink);
+
+                    listElement.appendChild(listItem);
+                });
+		    };
+		    
+		    updateArticlesList("positiveArticles", data.positive_articles);
+		    updateArticlesList("negativeArticles", data.negative_articles);
+		    updateArticlesList("neutralArticles", data.neutral_articles);
+		}
+    
+		function setSelectedCoin(coin) {
+		    const coinSelect = document.getElementById('coinSelect');
+		    coinSelect.value = coin;
+		}
+    
+		window.onload = function() {
+		    const urlParams = new URLSearchParams(window.location.search);
+		    const coin = urlParams.get('coin') || 'bitcoin';
+		    setSelectedCoin(coin);
+    
+		    const coinSelect = document.getElementById('coinSelect');
+		    const getSentimentsButton = document.getElementById('getSentimentsButton');
+		    
+		    getSentimentsButton.addEventListener('click', function() {
+			  const selectedCoin = coinSelect.value;
+			  fetchSentimentData(selectedCoin);
+		    });
+    
+		    // Initialize Plotly chart
+		    const initData = {{ plotly_chart_data|tojson|safe }};
+			const initLayout = {{ plotly_chart_layout|tojson|safe }};
+			Plotly.newPlot('plotlyChartDiv', initData, initLayout, {responsive: true});
+
+		};
+	</script>
+
+	<!-- Selection Box for Cryptocurrencies -->
+	<div class="d-flex justify-content-end align-items-center mb-3">
+        <label for="coinSelect" class="form-label text-light me-2">Select Cryptocurrency: </label>
+        <div class="select-wrapper me-2" style="max-width: 200px; width: 100%;">
+            <select class="form-select custom-select-arrow" style="background-color: #2c2c2c; color: white; border: none;" id="coinSelect">
+                <option value="bitcoin" {% if selected_coin == 'bitcoin' %}selected{% endif %}>Bitcoin</option>
+                <option value="ethereum" {% if selected_coin == 'ethereum' %}selected{% endif %}>Ethereum</option>
+                <option value="dogecoin" {% if selected_coin == 'dogecoin' %}selected{% endif %}>Dogecoin</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+        <button id="getSentimentsButton" class="btn btn-dark">Get Sentiments</button>
+    </div>
+	
+    <!-- Plotly Bar Chart -->
+    <div class="card bg-dark text-light">
+		<div class="card-header">
+		    Chart Title (Optional)
+		</div>
+		<div class="card-body">
+		    <div id="plotlyChartDiv" style="width: 100%; height: 100%;"></div>
+		</div>
+	</div>
+
+    <div class="row mt-5">
+            <!-- Positive Articles Section -->
+            <div class="col-md-12">
+                <div class="card bg-dark text-white mb-3">
+                    <div class="card-header">Positive Articles</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Positive Sentiments</h5>
+                        <ul class="list-group list-group-flush bg-dark" id="positiveArticles">
+                            {% for article in positive_articles %}
+                                <li class="list-group-item bg-dark text-white">
+                                    {{ article.title }}
+                                    <a href="{{ article.url }}" target="_blank" class="float-end">Read more</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Negative Articles Section -->
+            <div class="col-md-12">
+                <div class="card bg-dark text-white mb-3">
+                    <div class="card-header">Negative Articles</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Negative Sentiments</h5>
+                        <ul class="list-group list-group-flush bg-dark" id="negativeArticles">
+                            {% for article in negative_articles %}
+                                <li class="list-group-item bg-dark text-white">
+                                    {{ article.title }}
+                                    <a href="{{ article.url }}" target="_blank" class="float-end">Read more</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Neutral Articles Section -->
+            <div class="col-md-12">
+                <div class="card bg-dark text-white mb-3">
+                    <div class="card-header">Neutral Articles</div>
+                    <div class="card-body">
+                        <h5 class="card-title">Neutral Sentiments</h5>
+                        <ul class="list-group list-group-flush bg-dark" id="neutralArticles">
+                            {% for article in neutral_articles %}
+                                <li class="list-group-item bg-dark text-white">
+                                    {{ article.title }}
+                                    <a href="{{ article.url }}" target="_blank" class="float-end">Read more</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<!--No Banner Code-->
+<script>
+    var banner = document.getElementById("banner");
+    banner.parentNode.removeChild(banner);
+</script>
+<!--End No Banner Code-->
+
+{% endblock %}

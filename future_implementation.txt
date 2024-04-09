@@ -1,0 +1,157 @@
+For about us page:
+
+1. Welcome Introduction
+Start with a brief introduction that welcomes visitors and offers a snapshot of what your project, Coinalyzer, is about. Highlight your unique value proposition and what visitors can expect to learn or achieve by using your website.
+
+2. Our Story
+Share the backstory of how Coinalyzer came to be. This could include your inspiration for starting the project, the challenges you faced, and how you've evolved. This section helps to build a connection with your audience by sharing your journey.
+
+3. Mission and Vision
+Clearly articulate your mission (what you're doing and why) and vision (what you hope to achieve in the future). This helps visitors understand the purpose behind your project and what drives you.
+
+4. Meet the Team
+Enhance the "The Team" section by including detailed profiles for each team member. Alongside names and roles, add professional photographs, brief bios, and perhaps fun facts or quotes. This personalizes your project and builds trust.
+
+5. Our Research and Findings
+Expand on the section that introduces your research paper. Include key insights, discoveries, and how your findings contribute to the field of cryptocurrency and blockchain technology. Make it engaging by highlighting the impact of your work.
+
+6. Technologies and Methodologies
+Describe the technologies, tools, and methodologies you use in your analysis and development. This showcases your expertise and the innovative approaches behind your project.
+
+7. Success Stories or Testimonials
+If applicable, include testimonials from users or success stories that demonstrate how your project has positively impacted others. This adds credibility and can inspire new visitors to engage with your content or services.
+
+8. Partnerships and Collaborations
+Mention any partnerships, collaborations, or affiliations with educational institutions, tech communities, or industry organizations. This section can lend authority and show your connectedness in the field.
+
+9. Future Directions
+Share what's next for Coinalyzer. This could include upcoming features, research areas, or community events. It keeps visitors interested in your journey and encourages them to stay connected.
+
+10. Contact Information
+Provide clear contact information or a contact form for inquiries, support, or collaboration opportunities. Include email addresses, social media links, and possibly a phone number or mailing address.
+
+11. Call to Action (CTA)
+End with a strong CTA encouraging visitors to explore your website further, sign up for updates, download your research paper, or follow you on social media. Make it clear what step you want them to take next.
+
+{% extends 'base.html' %}
+
+<!--======================================
+ABOUT US CSS STYLE
+=======================================-->
+{% block extra_styles %}
+<style>
+    body {
+        font-family: 'Montserrat';
+        background: linear-gradient(to right, #0f3c6c 0%, #357ABD 100%); /* Gradient background */
+    }
+
+    .bg-particles {
+        position: fixed;    /* Fixed positioning */
+        top: 0;
+        left: 0;
+        width: 100vw;       /* Viewport width */
+        height: 100vh;      /* Viewport height */
+        z-index: -1;        /* Place it behind the content */
+    }
+</style>
+{% endblock %}
+
+<!--======================================
+ABOUT US CONTENT
+=======================================-->
+{% block content %}
+
+<div class="container-lg container_gap"> <!--Start of Main Div-->
+
+	<!-- Particles -->   
+		<canvas class='bg-particles' id='bg-particles'></canvas>
+	<!-- End Particles -->
+	
+	<!-- Title --> 
+    <h1 class="text-center my-4 mb-5">About us</h1>
+	<!-- End Title -->
+
+    <!--CARDS -->
+    <div class="container mt-3">
+        <div class="card mb-3" style="margin-bottom: 20px">
+            <div class="card-body text-center">
+                <div class = "card-text text-white">
+                    <p>Welcome to Coinalyzer! We are a group of enthusiastic students who are interested in the fascinating world of cryptocurrencies. Our team is composed of developers and researchers who are passionate about exploring the potential of blockchain technology and digital assets to transform the way we think about finance and money.</p>
+                    <p>With our diverse backgrounds in computer science, blockchain, cryptocurrency and other related fields, we are constantly learning and pushing the boundaries of what's possible in this exciting and rapidly-evolving industry. Whether it's building innovative decentralized applications, conducting groundbreaking research, or simply staying up-to-date on the latest trends and developments, we are fully committed to exploring the full potential of this dynamic field.</p>
+                    <p>Thank you for visiting our website, and we hope that you'll join us on this exciting journey into the future of finance!</p>
+                    
+                </div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 text-center">
+        <h1 class="header-text text-white">Research Paper</h1>
+    </div>
+    <div class="container mt-3">
+        <div class="card mb-3" style="margin-bottom: 20px">
+            <div class="card-body text-center text-white">
+                <div class = "card-text">
+                    <p>We as UG students have been dedicated to conducting extensive research in the field of cryptocurrency and blockchain technology. We have focused on various aspects of this emerging technology, including identifying the best-suited algorithm for prediction and analyzing social sentiments towards cryptocurrencies. Our research paper, which you can find below, outlines our findings and conclusions based on months of thorough research and analysis.</p>
+                    <iframe src="static/researchpaper/researchpaper.pdf" 
+                    style="width: 100%; height: 100vh; border: none; box-shadow: 0 0 5px #333;"></iframe>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 text-center">
+        <h1 class="header-text text-white">The Team</h1>
+    </div>
+    <div class="container mt-3">
+        <div class="card mb-3" style="margin-bottom: 20px">
+            <div class="card-body text-center text-white">
+                <div class = "card-text">
+                    <p><strong>Abhijith Nair</strong></p>
+                    <p><strong>Pranav Vichur</strong></p>
+                    <p><strong>Raj Abhishek Pandey</strong></p>
+                    <p><strong>Rishi Chowdary</strong></p>
+                    <p><strong>T Kanak Raj</strong> </p>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 text-center">
+        <h1 class="header-text">Developed by</h1>
+    </div>
+    <div class="container mt-3">
+        <div class="card mb-3" style="margin-bottom: 20px">
+            <div class="card-body text-center text-white">
+                <div class = "card-text">
+                    <p>This website was built for a degree project on cryptocurrency price analysis, news, price prediction, and social sentiment analysis. The website was developed by T Kanak Raj, Abhijith Nair, Pranav Vichur, Rishi Chowdary, and Raj Abhishek Pandey of BCA DA 6th Semester with guidance and support from their faculty. Prof. Jayashree M Kudari, at Jain University.</p>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 text-center">
+        <h1 class="header-text">Our Mission</h1>
+    </div>
+    <div class="container mt-3">
+        <div class="card mb-3" style="margin-bottom: 20px">
+            <div class="card-body text-center text-white">
+                <div class = "card-text">
+                    <p>At Coinalyzer, we believe that cryptocurrencies and blockchain technology have the potential to revolutionize the way we conduct transactions and interact with the world around us. Our team of passionate and dedicated students is committed to exploring the latest developments in the field and providing our users with comprehensive insights and analysis.</p>
+                    <p>We aim to go beyond just providing information and instead offer a deep understanding of the complexities of cryptocurrency and blockchain technology. Our team has spent countless hours conducting research and analyzing data to ensure that we deliver the most accurate and up-to-date information to our users.</p>
+                    <p>Whether you are a seasoned cryptocurrency investor or just starting to learn about blockchain technology, our goal is to provide a platform that is accessible and informative for everyone. We believe that by empowering our users with knowledge and insights, we can help drive the adoption and growth of cryptocurrencies and blockchain technology in the years to come.</p>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--No Banner Code-->
+<script>
+  var banner = document.getElementById("banner");
+  banner.parentNode.removeChild(banner);
+</script>
+<!--End No Banner Code-->
+
+{% endblock %}

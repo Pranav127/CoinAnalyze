@@ -1,0 +1,154 @@
+
+/*=======================================
+HEADER-RESPONSIVE 
+=======================================*/
+
+/* Media query for mobile resolution */
+@media (max-width: 767px) {
+	.header {
+		position: relative;
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		padding-top: 0;
+		/* Remove the padding on top */
+		background-color: #000;
+		/* Black background for mobile */
+	}
+
+	.header .navbar-sticky {
+		display: none;
+		/* Disable sticky header for mobile */
+	}
+
+	.header .navbar-collapse {
+		background-color: #000;
+		/* Black background for mobile */
+	}
+
+	.navbar-brand img {
+		width: 70%;
+		/* Adjust the width to your preferred size */
+		/* You can also use max-width if you prefer */
+		/* max-width: 80%; */
+	}
+
+	/* Override styles for dropdown menu */
+	.header .nav-item .dropdown-menu {
+		background: #000;
+		/* Black background for mobile */
+	}
+
+	.header .nav-item .dropdown-menu .dropdown-item:before {
+		color: #fff;
+		/* White color for the dropdown arrow */
+	}
+
+	/* Disable hover effect for nav-item .nav-link */
+	.header .nav-item .nav-link:hover {
+		background-color: transparent;
+		border-radius: 0;
+		/* Remove border radius */
+		color: #e0e0e0;
+		/* Restore text color */
+	}
+
+	/* Disable hover effect for .navbar-blue.navbar-sticky .nav-item .nav-link */
+	.navbar-blue.navbar-sticky .nav-item .nav-link:hover {
+		background-color: transparent;
+		border-radius: 0;
+		/* Remove border radius */
+		color: #e0e0e0;
+		/* Restore text color */
+	}
+}
+
+/*=======================================
+BANNER-RESPONSIVE 
+=======================================*/
+/* Media query to disable bubbles and animations for mobile */
+@media (max-width: 767px) {
+	.bubble-set {
+		display: none;
+		/* Hide the bubble elements */
+	}
+
+	/* Disable animations */
+	.bubble-set .bubble-lg,
+	.bubble-set .bubble-md,
+	.bubble-set .bubble-sm {
+		animation: none;
+	}
+
+	.bg-particles {
+		display: none;
+		/* Hide the bubble elements */
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-------------------------------
+custom container responsive
+-------------------------------*/
+/* Mobile Devices */
+@media (max-width: 767px) {
+    /* Adjust styles for mobile devices here */
+
+}
+
+/* Tablets and Small Desktops (>= 768px) */
+@media (min-width: 768px) {
+    /* Adjust styles for tablets and small desktops here */
+
+}
+
+/* Medium Desktops (>= 992px) */
+@media (min-width: 992px) {
+    /* Adjust styles for medium desktops here */
+
+}
+
+/* Large Desktops (>= 1200px) */
+@media (min-width: 1200px) {
+    /* Adjust styles for large desktops here */
+
+}
+
+/* 1080p Screen (1920x1080) */
+@media (min-width: 1920px) and (min-height: 1080px) {
+    /* Adjust styles for 1080p screens here */
+
+}
+
+/* 1440p Screen (2560x1440) */
+@media (min-width: 2560px) and (min-height: 1440px) {
+    /* Adjust styles for 1440p screens here */
+
+}
+
+/* 4k Screen (3840x2160) */
+@media (min-width: 3840px) and (min-height: 2160px) {
+    /* Adjust styles for 4k screens here */
+
+}

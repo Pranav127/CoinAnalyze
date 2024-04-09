@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+
+<!--======================================
+PRICE CSS STYLES
+=======================================-->
+{% block extra_styles %}
+<style>
+    body {
+        font-family: 'Montserrat';
+        background: linear-gradient(to right, #0f3c6c 0%, #357ABD 100%); /* Gradient background */
+    }
+
+    .bg-particles {
+        position: fixed;    /* Fixed positioning */
+        top: 0;
+        left: 0;
+        width: 100vw;       /* Viewport width */
+        height: 100vh;      /* Viewport height */
+        z-index: -1;        /* Place it behind the content */
+    }
+
+    #coinsTable tbody, #exchangesTable tbody, #marketsTable tbody {
+        transition: opacity 0.1s ease;
+    }
+</style>
+{% endblock %}
+
+<!--======================================
+PRICE CONTENT
+=======================================-->
+{% block content %}
+
+<!-- Particles -->   
+    <canvas class='bg-particles' id='bg-particles'></canvas>
+<!-- End Particles -->
+
+<div class="container-lg container_gap"> <!--Start of Main Div-->
+
+    <h1 class="text-center my-4 mb-5">Cryptocurrency Prices and Data</h1>
+
+    <!-- Toggle buttons and Currency Selector -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Toggle Buttons -->
+        <div class="d-flex">
+            <button class="btn btn-dark btn-pill text-uppercase custom-gap" onclick="toggleView('coins')">Coins</button>
+            <button class="btn btn-dark btn-pill text-uppercase custom-gap" onclick="toggleView('exchanges')">Exchanges</button>
+            <button class="btn btn-dark btn-pill text-uppercase custom-gap" onclick="toggleView('markets')">Markets</button>
+            <button class="btn btn-dark btn-pill text-uppercase" onclick="toggleView('candles')">Candles</button>
+        </div>
+
+        <!-- Currency Selector -->
+        <div class="d-flex align-items-center">
+            <span class="text-light custom-gap" style="white-space: nowrap;">Select Currency:</span>
+            <select id="currencySelect" class="form-select bg-dark text-light border-0" onchange="location = this.value;">
+                {% for rate, details in rates.items() %}
+                <option value="?currency={{ rate }}" {% if current_currency == rate %}selected{% endif %}>{{ details['name'] }} - {{ rate }} - {{ details['symbol'] }}</option>
+                {% endfor %}
+            </select>
+        </div>               
+    </div>
+    
+    <!-- Coins Table -->
+    <div id="coinsTable">
+        <table class="table table-responsive table-dark table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" style="text-align: center;">Rank</th>
+                    <th scope="col">Coin</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">24h</th>
+                    <th scope="col">24h Volume</th>
+                    <th scope="col">Mkt Cap</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coin in coins %}
+                <tr>
+                    <th scope="row" style="text-align: center;">{{ loop.index }}</th>
+                    <td>
+                        <img src="{{ coin.image }}" alt="{{ coin.name }} icon" width="30" class="mr-2">
+                        {{ coin.name }} <span class="text-light" style="opacity: 0.6;">{{ coin.symbol }}</span>
+                    </td>
+                    <td>{{ current_symbol  }}{{ '{:,.2f}'.format(coin.priceUsd) }}</td>
+                    <td style="color: {{ 'green' if coin.changePercent24Hr >= 0 else 'red' }}">
+                        {{ '{:.1f}'.format(coin.changePercent24Hr) }}
+                    </td>
+                    <td>{{ current_symbol  }}{{ '{:,.2f}'.format(coin.volumeUsd24Hr) }}</td>
+                    <td>{{ current_symbol  }}{{ '{:,.2f}'.format(coin.marketCapUsd) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Exchanges Table -->
+    <div id="exchangesTable" style="display: none;">
+        <table class="table table-responsive table-dark table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th scope="col" style="text-align: center;">Rank</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Trading Pairs</th>
+                    <th scope="col">Volume (24Hr)</th>
+                    <th scope="col">Total (%)</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for exchange in exchanges %}
+                <tr>
+                    <th scope="row" style="text-align: center;">{{ loop.index }}</th>
+                    <td>{{ exchange.name }}</td>
+                    <td>{{ exchange.tradingPairs }}</td>
+                    <td>{{ current_symbol  }}{{ '{:,.2f}'.format(exchange.volumeUsd) }}</td>
+                    <td>{{ exchange.percentTotalVolume }}%</td>
+                    <td>
+                        {% if exchange.status == "Online" %}
+                            <span class="badge bg-success rounded-circle" style="width: 15px; height: 15px; display: inline-block;"></span>
+                        {% else %}
+                            <span class="badge bg-danger rounded-circle" style="width: 15px; height: 15px; display: inline-block;"></span>
+                        {% endif %}
+                    </td>                    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Markets Table -->
+    <div id="marketsTable" style="display: none;">
+        <table class="table table-responsive table-dark table-bordered  table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Exchange</th>
+                    <th scope="col">Base Symbol</th>
+                    <th scope="col">Quote Symbol</th>
+                    <th scope="col">Price (USD)</th>
+                    <th scope="col">24h Volume (USD)</th>
+                    <th scope="col">Percent Exchange Volume</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for market in markets %}
+                <tr>
+                    <td>{{ market.exchangeId }}</td>
+                    <td>{{ market.baseSymbol }}</td>
+                    <td>{{ market.quoteSymbol }}</td>
+                    <td>{{ current_symbol  }}{{ '{:,.2f}'.format(market.priceUsd) }}</td>
+                    <td>{{ current_symbol  }}{{ '{:,.2f}'.format(market.volumeUsd24Hr) }}</td>
+                    <td>{{ market.percentExchangeVolume }}%</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Candles Chart -->
+    <div id="candlesChart" style="display: none;">
+        <div class="card">
+            <div class="card-body">
+                <div id="plotly-chart" style="width: 100%; height: 600px;" loading="lazy"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+        
+        function checkIfElementIsInViewport() {
+            const element = document.getElementById('candlesChart');
+            if (isElementInViewport(element) && !element.hasAttribute('data-chart-drawn')) {
+                initializePlotly();  // the function to draw the chart
+                element.setAttribute('data-chart-drawn', 'true');
+            }
+        }
+        
+        document.addEventListener('scroll', checkIfElementIsInViewport);
+        document.addEventListener('resize', checkIfElementIsInViewport);
+        
+        function initializePlotly() {
+            var candlestick_chart = {{ candlestick_chart | safe }};
+            for (var i = 0; i < candlestick_chart.data[0].x.length; i++) {
+                candlestick_chart.data[0].x[i] = new Date(candlestick_chart.data[0].x[i]);
+            }
+        
+            var containerWidth = document.getElementById('plotly-chart').clientWidth;
+            candlestick_chart.layout.width = containerWidth;
+        
+            Plotly.newPlot('plotly-chart', candlestick_chart.data, candlestick_chart.layout, {responsive: true});
+        }
+        
+        // Resize the chart when the window is resized
+        window.addEventListener('resize', function() {
+            var containerWidth = document.getElementById('plotly-chart').clientWidth;
+            Plotly.relayout('plotly-chart', 'width', containerWidth);
+        });
+        
+
+        function toggleView(e) {
+            document.getElementById("coinsTable").style.display = "none";
+            document.getElementById("exchangesTable").style.display = "none";
+            document.getElementById("marketsTable").style.display = "none";
+            document.getElementById("candlesChart").style.display = "none";
+            if (e === 'coins') {
+                document.getElementById("coinsTable").style.display = "block";
+            } else if (e === 'exchanges') {
+                document.getElementById("exchangesTable").style.display = "block";
+            } else if (e === 'markets') {
+                document.getElementById("marketsTable").style.display = "block";
+            } else {
+                document.getElementById("candlesChart").style.display = "block";
+            }
+        }
+        
+        function updateData() {
+            let currency = document.getElementById("currencySelect").value.split("=")[1];
+            fetch(`/price?currency=${currency}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                let coinsTbody = document.querySelector("#coinsTable tbody");
+                let exchangesTbody = document.querySelector("#exchangesTable tbody");
+                let marketsTbody = document.querySelector("#marketsTable tbody");
+                coinsTbody.style.opacity = "0";
+                exchangesTbody.style.opacity = "0";
+                marketsTbody.style.opacity = "0";
+                setTimeout(() => {
+                    let coins = data.coins;
+                    let coinRows = "";
+                    coins.forEach((coin, index) => {
+                        coinRows += `
+                            <tr>
+                                <th scope="row">${index + 1}</th>
+                                <td>
+                                    <img src="${coin.image}" alt="${coin.name} icon" width="30" class="me-2">
+                                    ${coin.name} <span class="text-muted">${coin.symbol}</span>
+                                </td>
+                                <td>${data.current_symbol}${parseFloat(coin.priceUsd).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                <td style="color: ${coin.changePercent24Hr >= 0 ? "green" : "red"}">
+                                    ${parseFloat(coin.changePercent24Hr).toFixed(1)}%
+                                </td>
+                                <td>${data.current_symbol}${parseFloat(coin.volumeUsd24Hr).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                <td>${data.current_symbol}${parseFloat(coin.marketCapUsd).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                            </tr>
+                        `;
+                    });
+                    coinsTbody.innerHTML = coinRows;
+                    coinsTbody.style.opacity = "1";
+        
+                    let exchanges = data.exchanges;
+                    let exchangeRows = "";
+                    exchanges.forEach((exchange, index) => {
+                        exchangeRows += `
+                            <tr>
+                                <th scope="row">${index + 1}</th>
+                                <td>${exchange.name}</td>
+                                <td>${exchange.tradingPairs}</td>
+                                <td>${data.current_symbol}${parseFloat(exchange.volumeUsd).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                <td>${exchange.percentTotalVolume}%</td>
+                                <td>
+                                    ${"Online" === exchange.status ? '<span class="badge bg-success" style="border-radius: 50%; width: 15px; height: 15px; display: inline-block;"></span>' : '<span class="badge bg-danger" style="border-radius: 50%; width: 15px; height: 15px; display: inline-block;"></span>'}
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    exchangesTbody.innerHTML = exchangeRows;
+                    exchangesTbody.style.opacity = "1";
+        
+                    let markets = data.markets;
+                    let marketRows = "";
+                    markets.forEach((market, index) => {
+                        marketRows += `
+                            <tr>
+                                <td>${market.exchangeId}</td>
+                                <td>${market.baseSymbol}</td>
+                                <td>${market.quoteSymbol}</td>
+                                <td>${data.current_symbol}${parseFloat(market.priceUsd).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                <td>${data.current_symbol}${parseFloat(market.volumeUsd24Hr).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                                <td>${market.percentExchangeVolume}%</td>
+                            </tr>
+                        `;
+                    });
+                    marketsTbody.innerHTML = marketRows;
+                    marketsTbody.style.opacity = "1";
+        
+                }, 100);
+            });
+        }
+        
+        function isOnPricePage() {
+            let path = window.location.pathname;
+            return path.endsWith("/price") || path.endsWith("/price.html");
+        }
+               
+    </script>
+</div> <!--End of Main Div-->
+
+<!--No Banner Code-->
+<script>
+    var banner = document.getElementById("banner");
+    banner.parentNode.removeChild(banner);
+</script>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+
+    <div class="container mt-3">
+      {% for tweet in tweets %}
+      <div class="card mb-3" style="margin-bottom: 20px">
+        <div class="card-body">
+          <p class="card-text" style="color: white">Tweet:</p>
+          <p class="card-text" style="color: white">{{ tweet.text }}</p>
+          <p class="card-text" style="color: white">Time Tweeted: {{ tweet.time }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  

@@ -1,0 +1,1081 @@
+/*=======================================
+CUSTOM CSS
+=======================================*/
+
+body {
+    font-family: 'Montserrat';
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #fffefe;
+    /* Lighter text color for dark theme */
+    background-color: #2a2a2a;
+    /* Darker background color */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -ms-text-size-adjust: 100%;
+    overflow-x: hidden;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+a {
+    color: #357ABD;
+    /* Medium tone of blue */
+}
+
+a:hover {
+    color: #638FC0;
+    /* Slightly lighter blue on hover */
+}
+
+a,
+a:hover {
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    text-decoration: none;
+    outline: 0;
+}
+
+h1,
+h2,
+h4 {
+    font-family: 'Montserrat';
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h2 {
+    font-size: 2.3rem;
+}
+
+p {
+    margin-bottom: 3rem;
+    text-align: justify;
+}
+
+.text-blue-color {
+    color: #65adff;
+    /* Updated to blue tone */
+}
+
+.text-paste-color {
+    color: #65adff;
+    /* Updated to blue tone */
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: top;
+    border: 0 none;
+    outline: 0;
+}
+
+.container_gap {
+    padding-top: 10%;
+}
+
+.custom-gap {
+    margin-right: 1rem;
+    /* Adjust this value as needed */
+}
+
+/*=======================================
+CARD ANIMATION
+=======================================*/
+
+.flip-image {
+    top: 0;
+    left: 0;
+    animation: flip-animation 1.5s infinite;
+    transform-style: preserve-3d;
+}
+
+
+
+@keyframes flip-animation {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    50% {
+        transform: rotateY(180deg);
+    }
+
+    100% {
+        transform: rotateY(0deg);
+    }
+}
+
+/* justify  */
+
+.just {
+    text-align: justify;
+}
+
+
+/*=======================================
+BUTTONS
+=======================================*/
+
+.button {
+    font-family: 'Montserrat';
+    font-size: 14px;
+    font-weight: bold;
+    display: inline-block;
+    padding: .8rem 2rem;
+    background: linear-gradient(to right, #2b5b8f 0%, #357ABD 100%);
+    /* Gradient for buttons */
+}
+
+.button:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.button-pill {
+    border-radius: 50px;
+}
+
+.button-blue {
+    color: #fff;
+    background: linear-gradient(to right, #2b5b8f 0%, #357ABD 100%);
+    /* Gradient for buttons */
+}
+
+.button-blue:hover {
+    color: #fff;
+    background: linear-gradient(to right, #357ABD 0%, #638FC0 100%);
+    /* Lighter gradient on hover */
+}
+
+.button-gray {
+    color: #fff;
+    background: linear-gradient(to right, #555555 0%, #777777 100%);
+    /* Gradient for buttons */
+}
+
+.button-gray:hover {
+    color: #fff;
+    background: linear-gradient(to right, #777777 0%, #999999 100%);
+    /* Lighter gradient on hover */
+}
+
+.button-gray:hover .fa-play-circle {
+    color: #fff;
+}
+
+.button-gradient.button:not(:disabled):not(.disabled):active {
+    color: #fff;
+    background-image: linear-gradient(to right, #1e4a72 0%, #2b5b8f 100%);
+    /* Deeper gradient for active state */
+}
+
+
+/*=======================================
+HEADER 
+=======================================*/
+
+.header {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    padding-top: 2rem;
+    /* 2 times the root font size */
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    padding-left: 2.5rem;
+    /* 40px / 16px = 2.5rem */
+    padding-right: 2.5rem;
+    /* 40px / 16px = 2.5rem */
+    background-color: transparent;
+}
+
+.header .navbar {
+    font-family: 'Montserrat';
+    font-size: 0.75rem;
+    /* 12px / 16px = 0.75rem */
+    font-weight: 700;
+    padding: 0.4rem 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+@media (min-width: 48rem) {
+
+    /* 768px / 16px = 48rem */
+    .header .navbar-expand-md .navbar-nav .nav-link {
+        padding-right: 1.2rem;
+        padding-left: 1.2rem;
+    }
+}
+
+.header .nav-item .nav-link {
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+}
+
+.header .nav-item .nav-link:hover {
+    background-color: #023364;
+    /* Medium tone of blue for the box background */
+    border-radius: 0.625rem;
+    /* 10px / 16px = 0.625rem; Rounded corners */
+    color: #e0e0e0;
+    /* Lighter text color for better contrast on the blue background */
+}
+
+.header .nav-item .active {
+    color: #357ABD;
+    /* Medium tone of blue */
+}
+
+.header .nav-item .dropdown-menu {
+    z-index: 200;
+    width: 14rem;
+    /* 224px / 16px = 14rem */
+    margin-top: 0;
+    border: none;
+    background: #2a2a2a;
+    /* Darker dropdown background */
+}
+
+.header .nav-item .dropdown-menu .dropdown-item {
+    font-size: 0.6875rem;
+    /* 11px / 16px = 0.6875rem */
+    padding: 0.5rem 1.5rem;
+    /* 8px / 16px = 0.5rem, 24px / 16px = 1.5rem */
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+}
+
+.header .nav-item .dropdown-menu .dropdown-item:hover,
+.header .nav-item .dropdown-menu .dropdown-item:focus,
+.header .nav-item .dropdown-menu .dropdown-item.active {
+    color: #357ABD;
+    /* Medium tone of blue */
+    background: transparent;
+}
+
+.header .nav-item .dropdown-menu:before {
+    font-family: Montserrat;
+    font-size: 1.5625rem;
+    /* 25px / 16px = 1.5625rem */
+    position: absolute;
+    top: -1.375rem;
+    /* -22px / 16px = -1.375rem */
+    bottom: -0.9375rem;
+    /* -15px / 16px = -0.9375rem */
+    left: 15%;
+    /* 15% of the parent width */
+    height: 1.375rem;
+    /* 22px / 16px = 1.375rem */
+    margin-left: -0.4375rem;
+    /* -7px / 16px = -0.4375rem */
+    content: '\f0d8';
+    color: #2a2a2a;
+    /* Darker dropdown arrow color */
+}
+
+.header .navbar-collapse {
+    margin-top: 0.5rem;
+    /* 8px / 16px = 0.5rem */
+}
+
+.navbar-sticky {
+    position: fixed;
+    z-index: 110;
+    top: 0;
+    padding-top: 0;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background: #2a2a2a;
+    /* Darker navbar background */
+    box-shadow: 0 0 1.875rem 0 rgba(0, 0, 0, 0.07);
+    /* 30px / 16px = 1.875rem */
+}
+
+.navbar-sticky .nav-item .nav-link {
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+}
+
+.navbar-sticky .nav-item .active {
+    color: #357ABD;
+    /* Medium tone of blue */
+}
+
+.navbar-blue .navbar-sticky {
+    position: fixed;
+    top: 0;
+    padding-top: 0;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    background: #2b5b8f;
+    /* Deeper blue tone */
+    box-shadow: 0 0 1.875rem 0 rgba(0, 0, 0, 0.07);
+    /* 30px / 16px = 1.875rem */
+}
+
+.navbar-blue .navbar-sticky .nav-item .nav-link {
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+}
+
+.navbar-blue.navbar-sticky .nav-item .nav-link:hover {
+    background-color: #4e7cb9;
+    /* Updated color */
+    border-radius: 0.625rem;
+    /* 10px / 16px = 0.625rem; Rounded corners */
+    color: #e0e0e0;
+    /* Lighter text color for better contrast on the blue background */
+}
+
+.navbar-blue.navbar-sticky .nav-item .active {
+    color: #357ABD;
+    /* Medium tone of blue */
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/*=======================================
+BUBBLE
+=======================================*/
+.bubble-set .bubble-lg {
+    top: calc(100% - 300px);
+    left: 2%;
+    width: 950px;
+    height: 950px;
+}
+
+.bubble-set div {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .04);
+}
+
+.bubble-set .bubble-md {
+    top: -300px;
+    right: -10%;
+    width: 835px;
+    height: 835px;
+}
+
+.bubble-set div {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .04);
+}
+
+.bubble-set .bubble-sm {
+    top: 0;
+    right: 15%;
+    width: 535px;
+    height: 535px;
+}
+
+.bubble-set div {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .04);
+}
+
+.bubble-set .bubble-lg {
+    animation: bubble-move-lg 10s ease-in-out infinite alternate;
+}
+
+.bubble-set .bubble-md {
+    animation: bubble-move-md 8s ease-in-out infinite alternate;
+}
+
+.bubble-set .bubble-sm {
+    animation: bubble-move-sm 6s ease-in-out infinite alternate;
+}
+
+@keyframes bubble-move-lg {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(20%, -20%);
+    }
+}
+
+@keyframes bubble-move-md {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-10%, -10%);
+    }
+}
+
+@keyframes bubble-move-sm {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    100% {
+        transform: translate(-5%, 5%);
+    }
+}
+
+
+/*=======================================
+DARK THEME
+=======================================*/
+
+.dark-theme .navbar-sticky {
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    background: #1a1a1a;
+    /* Even darker navbar background */
+    box-shadow: none;
+}
+
+.dark-theme .navbar-sticky .nav-item .nav-link {
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+}
+
+.dark-theme .navbar-sticky .nav-item .active {
+    color: #357ABD;
+    /* Medium tone of blue */
+}
+
+/*=======================================
+BANNER
+=======================================*/
+
+.banner-section {
+    position: relative;
+    height: auto;
+}
+
+.banner-section .banner-img {
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.banner-section .hero-text {
+    position: absolute;
+    top: 50%;
+    display: inherit;
+    width: 100%;
+    -webkit-transform: translateY(-40%);
+    -ms-transform: translateY(-40%);
+    transform: translateY(-40%);
+
+}
+
+.banner-section .hero-title {
+    font-size: 48px;
+    margin-bottom: 1rem;
+    color: #357ABD;
+    /* Medium tone of blue */
+}
+
+.banner-section .here-sub-title {
+    font-family: 'Montserrat';
+    font-size: 26px;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 3rem;
+    color: #707070;
+}
+
+.gradient-banner {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    background: linear-gradient(to bottom right, #052444 0%, #438dd7 100%);
+}
+
+.gradient-banner .hero-text {
+    z-index: 10;
+    top: 50%;
+    -webkit-transform: translateY(-30%);
+    -ms-transform: translateY(-30%);
+    transform: translateY(-30%);
+}
+
+
+.gradient-banner .banner-img {
+    position: relative;
+    top: -20%;
+}
+
+.gradient-banner .hero-footer {
+    position: absolute;
+    z-index: 1;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
+}
+
+@media (min-width: 1600px) {
+    .gradient-banner .hero-footer {
+        height: 300px;
+    }
+}
+
+.gradient-banner .hero-footer .footer-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 2rem;
+    color: #fff;
+}
+
+.gradient-banner .hero-footer .footer-text h2 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.gradient-banner .hero-footer .footer-text p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.gradient-banner .hero-footer .footer-text a {
+    color: #fff;
+}
+
+.gradient-banner .hero-footer .footer-text a:hover {
+    color: #fff;
+}
+
+
+/*=======================================
+DARK THEME
+=======================================*/
+
+.dark-theme .banner-section .here-sub-title {
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+}
+
+/*=======================================
+SECTION STYLE
+=======================================*/
+
+.section-gap {
+    padding: 3rem 0;
+}
+
+.section-gray-bg {
+    background: #242424;
+    /* Darker section background */
+}
+
+.section-title {
+    margin-bottom: 3rem;
+}
+
+.section-title h2 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.col-gap {
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+
+/*=======================================
+DARK THEME
+=======================================*/
+
+.dark-theme .section-gray-bg {
+    background: #1a1a1a;
+    /* Even darker section background */
+}
+
+.dark-theme .card {
+    background: #2a2a2a;
+    /* Darker card background */
+}
+
+
+/*=======================================
+CUSTOM SCROLL BAR
+=======================================*/
+
+/* Style the scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    /* Set width of the scrollbar */
+}
+
+/* Style the scrollbar track */
+::-webkit-scrollbar-track {
+    background-color: #2a2a2a;
+    /* Darker scrollbar track */
+}
+
+/* Style the scrollbar thumb */
+::-webkit-scrollbar-thumb {
+    background-color: #357ABD;
+    /* Medium tone of blue */
+    border-radius: 5px;
+}
+
+/* Change scrollbar thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #638FC0;
+    /* Slightly lighter blue on hover */
+}
+
+
+/*=======================================
+SCROLL TO TOP BUTTON
+=======================================*/
+
+/* Style the button */
+#myBtn {
+    position: fixed;
+    /* Fixed/sticky position */
+    bottom: 20px;
+    /* Place the button at the bottom of the page */
+    right: 30px;
+    /* Place the button 30px from the right */
+    z-index: 99;
+    /* Make sure it does not overlap */
+    border: none;
+    /* Remove borders */
+    outline: none;
+    /* Remove outline */
+    background-color: #0f3c6c;
+    /* Gradient background #2a2a2a*/
+    color: white;
+    /* Text color */
+    cursor: pointer;
+    /* Add a mouse pointer on hover */
+    width: 50px;
+    /* Set width */
+    height: 50px;
+    /* Set height */
+    padding: 10px;
+    /* Some padding */
+    border-radius: 20%;
+    /* Make it rounded */
+}
+
+/* On hover, add a darker background color */
+#myBtn:hover {
+    background-color: #638FC0;
+    /* Lighter gradient on hover */
+}
+
+/* Add a FontAwesome icon */
+#myBtn i {
+    font-size: 25px;
+}
+
+.fa-angle-up {
+    margin-left: 1px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/*=======================================
+FAQ
+=======================================*/
+
+.faq .card {
+    margin-bottom: 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #333;
+    box-shadow: none;
+}
+
+.faq .card-header {
+    padding: 0;
+    border-bottom: none;
+    border-radius: 4px;
+    background: transparent;
+}
+
+.faq .card-header h5 {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.faq .card-header a.collapsed,
+.faq .card-header a {
+    position: relative;
+    display: block;
+    padding: 1.5rem 1.5rem;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+    background: #333;
+    /* Dark background */
+    color: #76abf9;
+    /* Text color */
+}
+
+.faq .card-header a.collapsed:after,
+.faq .card-header a:after {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 14px;
+    position: absolute;
+    top: 35%;
+    right: 20px;
+}
+
+.faq .card-header a.collapsed:after {
+    content: '\f105';
+}
+
+.faq .card-header a:after {
+    content: '\f107';
+}
+
+.faq .card-header a:hover,
+.faq .card-header a.collapsed:hover {
+    color: #b4d6ff;
+    /* Lighter hover color */
+}
+
+.faq .card-body {
+    border-radius: 0 0 4px 4px;
+    background-color: #333;
+    /* Same as non-collapsed question */
+}
+
+.faq .card-body.show {
+    background-color: #444;
+    /* Same as collapsed question */
+}
+
+.faq .card-body p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #fff;
+    /* Text color */
+}
+
+.view-link {
+    color: #fff;
+    /* Text color */
+}
+
+/*=======================================
+APP FOOTER
+=======================================*/
+
+footer {
+    font-size: 14px;
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+    line-height: 1.5;
+    margin-top: 2rem;
+    background-color: #1a1a1a;
+}
+
+footer a {
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+    text-decoration: none;
+}
+
+footer h4 {
+    color: #e0e0e0;
+    /* Lighter text color for dark theme */
+}
+
+footer ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+footer hr {
+    border-color: rgba(255, 255, 255, 0.1);
+    margin: 2rem 0;
+}
+
+@media (max-width: 576px) {
+    footer .col-sm-12 {
+        margin-bottom: 2rem;
+    }
+}
+
+ul.list-unstyled li a:hover,
+a:hover i {
+    color: #357ABD;
+    /* Medium tone of blue */
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.small {
+    font-size: 12px;
+}
+
+/*=======================================
+TABLE
+=======================================*/
+/* Styling for the table headers */
+.table {
+    border-collapse: separate;
+    border-spacing: 0 12px;
+    /* Adjusted the vertical spacing */
+}
+
+.table thead th {
+    background-color: #2a2a2a;
+    border: none;
+    font-weight: bold;
+    text-align: left;
+}
+
+.table thead tr {
+    border-radius: 5px;
+}
+
+.table thead th:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.table thead th:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Styling for the table rows */
+.table tbody tr {
+    background-color: #2a2a2a;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* Remove vertical borders */
+.table td,
+.table th {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+    vertical-align: middle;
+}
+
+.table tbody tr:first-child td,
+.table tbody tr:first-child th {
+    border-top: none;
+}
+
+/* Styling for the table cells */
+.table tbody td,
+.table tbody th {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+.table tbody tr td:first-child,
+.table tbody tr th:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.table tbody tr td:last-child,
+.table tbody tr th:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Styling for the table rows */
+.table tbody tr {
+    background-color: #2a2a2a;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    /* Added transform transition */
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+/* New Code for Zoom-in Effect on Hover */
+.table tbody tr:hover {
+    transform: scale(1.05);
+    /* 1.05 times the original size */
+    cursor: pointer;
+    /* Optional: changes the cursor to a hand */
+    z-index: 1;
+    /* Optional: bring the hovered row to the front */
+}
+
+
+/*=======================================
+PAGINATION
+=======================================*/
+.pagination .page-item .page-link {
+    border-color: #343a40;
+    /* Dark background color */
+    background-color: #343a40;
+    /* Dark background color */
+    color: #ffffff;
+    /* White text color */
+}
+
+.pagination .page-item.active .page-link,
+.pagination .page-item:hover .page-link {
+    border-color: #454d55;
+    /* Slightly lighter than dark background for hover effect */
+    background-color: #454d55;
+    /* Slightly lighter than dark background for hover effect */
+    color: #ffffff;
+    /* White text color */
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d;
+    /* Gray color for disabled items */
+    pointer-events: none;
+    background-color: #343a40;
+    /* Dark background color */
+    border-color: #343a40;
+    /* Dark background color */
+}
+
+/*=======================================
+LOGIN PAGE
+=======================================*/
+
+.body-login {
+    margin: 0;
+    padding: 0;
+    background: black;
+    overflow: hidden;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.body-login .form {
+    background-color: rgba(255, 255, 255, 0.13);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 0.625rem;
+    backdrop-filter: blur(0.625rem);
+    border: 0.125rem solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 2.5rem rgba(8, 7, 16, 0.6);
+    padding: 2.5rem 1.875rem;
+    color: #ffffff;
+}
+
+.body-login form * {
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.03125rem;
+    outline: none;
+    border: none;
+}
+
+form h3 {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 2.625rem;
+    text-align: center;
+}
+
+.kk {
+    margin: 0.0625rem;
+}
+
+.login-label {
+    display: block;
+    margin-top: 1.875rem;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.1875rem;
+}
+
+.login-input {
+    display: block;
+    height: 3.125rem;
+    width: 93%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 0.1875rem;
+    padding: 0 0.625rem;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    box-shadow: 0px 0.1875rem 0.4375rem -0.1875rem;
+    color: #ffffff;
+}
+
+::placeholder {
+    color: #e5e5e5;
+}
+
+.btn-login {
+    margin-top: 1.875rem;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.27);
+    color: #ffffff;
+    padding: 0.9375rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+}
+
+.btn-login:hover {
+    background-color: rgba(255, 255, 255, 0.47);
+    border: 0.0625rem #ffffff solid;
+}
+
+.social-login {
+    margin-top: 1.875rem;
+    display: flex;
+}
+
+.social-login div {
+    background: red;
+    width: 9.375rem;
+    border-radius: 0.1875rem;
+    padding: 0.625rem 0.625rem 0.625rem 0.625rem;
+    background-color: rgba(255, 255, 255, 0.27);
+    color: #eaf0fb;
+    text-align: center;
+}
+
+.social-login div:hover {
+    background-color: rgba(255, 255, 255, 0.47);
+    border: 0.0625rem #ffffff solid;
+}
+
+.social-login .fb {
+    margin-left: 1.5625rem;
+}
+
+.social-login i {
+    margin-right: 0.25rem;
+}

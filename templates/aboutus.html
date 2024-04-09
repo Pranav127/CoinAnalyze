@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+<!--======================================
+ABOUT US CSS STYLE
+=======================================-->
+{% block extra_styles %}
+<style>
+    body {
+        font-family: 'Montserrat';
+        background: linear-gradient(to right, #0f3c6c 0%, #357ABD 100%);
+        /* Gradient background */
+    }
+
+    .bg-particles {
+        position: fixed;
+        /* Fixed positioning */
+        top: 0;
+        left: 0;
+        width: 100vw;
+        /* Viewport width */
+        height: 100vh;
+        /* Viewport height */
+        z-index: -1;
+        /* Place it behind the content */
+    }
+
+
+
+    .head-ab {
+        color: #fff;
+        font-size: 3rem;
+        margin-bottom: 1.5%;
+        font-weight: 600;
+    }
+
+    .txt-ab {
+        color: #fff;
+        text-align: justify;
+    }
+
+    .col-ab-1 {
+        padding: 2%;
+    }
+
+    .col-ab-2 {
+        padding: 1% 3%;
+
+    }
+
+    .txt-ab-l {
+        margin-bottom: 1%;
+        font-size: 1.15rem;
+
+    }
+</style>
+{% endblock %}
+
+<!--======================================
+ABOUT US CONTENT
+=======================================-->
+{% block content %}
+
+<div class="container-fluid container_gap"> <!--Start of Main Div-->
+
+    <!-- Particles -->
+    <canvas class='bg-particles' id='bg-particles'></canvas>
+    <!-- End Particles -->
+
+
+    <!-- End Title -->
+
+    <!--CARDS -->
+    <div class="abt ">
+        <div class="row">
+            <div class="col-md-6 col-ab-1"><img src="/static/assets/img/about.jpg" alt=""></div>
+            <div class="col-md-6 col-ab-2">
+                <!-- Title -->
+                <div class="head-ab" align="center">About Coinalyzer</div>
+
+                <div class="txt-ab ">
+                    <div class="txt-ab-l">Welcome to Coinalyzer! We are a group of enthusiastic students who are
+                        interested in the
+                        fascinating world of cryptocurrencies. Our team is composed of developers and researchers who
+                        are passionate about exploring the potential of blockchain technology and digital assets to
+                        transform the way we think about finance and money.</div>
+                    <div class="txt-ab-l">With our diverse backgrounds in computer science, blockchain, cryptocurrency
+                        and other related
+                        fields, we are constantly learning and pushing the boundaries of what's possible in this
+                        exciting and rapidly-evolving industry. Whether it's building innovative decentralized
+                        applications, conducting groundbreaking research, or simply staying up-to-date on the latest
+                        trends and developments, we are fully committed to exploring the full potential of this dynamic
+                        field.</div>
+                    <div class="txt-ab-l">Thank you for visiting our website, and we hope that you'll join us on this
+                        exciting journey into
+                        the future of finance!</div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!--No Banner Code-->
+    <script>
+        var banner = document.getElementById("banner");
+        banner.parentNode.removeChild(banner);
+    </script>
+    <!--End No Banner Code-->
+
+    {% endblock %}
